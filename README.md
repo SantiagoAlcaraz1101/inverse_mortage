@@ -42,6 +42,9 @@ Los casos específicos para el análisis del proyecto se encuentran en el siguie
 
 https://docs.google.com/spreadsheets/d/13gb_k_L8XEZlQfSJO_waRds3wgISHP0f5UH5qSc5wlM/edit?usp=sharing
 
+## Artículo sobre Hipoteca Inversa - Universidad de Medellín
+https://repository.udem.edu.co/bitstream/handle/11407/6356/T_MF_436.pdf?sequence=2&isAllowed=y
+
 ## Equipo de Trabajo
 
 - Nombre del docente: William David Velásquez
