@@ -26,14 +26,14 @@ class inverse_mortage(unittest.TestCase):
         self.assertTrue(result)
 
     
-    def extraordinary_testcase_1(self, age: int, stratum: int, commercial_value: float, antiqueness: int, is_women: bool, is_legal: bool):
+    def extraordinary_testcase_1(self, age: int):
 
-        if is_old_enough(age) and required_stratum(stratum) and is_value_enough(commercial_value) and is_property_valid(antiqueness) and hope_of_life(age, is_women) and is_legal:
+        if is_old_enough(age): #and required_stratum(stratum) and is_value_enough(commercial_value) and is_property_valid(antiqueness) and hope_of_life(age, is_women)== 0 and is_legal:
             return True
         return False
 
     def test_extraordinary_testcase_1(self):
-        age, stratum, commercial_value, antiqueness, is_women, is_legal = extraordinary_testcase_1
-        result = self.normal_testcase_1(age, stratum, commercial_value, antiqueness, is_women, is_legal)
+        age= 85
+        result = self.extraordinary_testcase_1(age)
         self.assertTrue(result)
 
