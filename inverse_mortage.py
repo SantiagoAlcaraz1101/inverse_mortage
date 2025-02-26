@@ -1,5 +1,22 @@
-class Persona:
-    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool):
+class Property:
+    def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool):
+        self.stratum: int = stratum
+        self.commercial_value: float = commercial_value
+        self.antiqueness: int = antiqueness
+        self.legality: bool = legality
+
+    def is_property_valid(self):
+        return self.antiqueness <= 25
+    
+    def required_stratum(self) -> bool:
+        return self.stratum >= 4
+    
+    def is_value_enough(self) -> bool:
+        return self.commercial_value >= 600e5 and self.commercial_value <= 800e5
+
+
+class Person:
+    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool, Property: Property):
         self.name: str = name
         self.age: int = age
         self.is_women: bool = is_women
@@ -21,18 +38,3 @@ class Persona:
                 return 0 
             return life_expentancy - self.age
         
-class Property:
-    def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool):
-        self.stratum: int = stratum
-        self.commercial_value: float = commercial_value
-        self.antiqueness: int = antiqueness
-        self.legality: bool = legality
-
-    def is_property_valid(self):
-        return self.antiqueness <= 25
-    
-    def required_stratum(self) -> bool:
-        return self.stratum >= 4
-    
-    def is_value_enough(self) -> bool:
-        return self.commercial_value >= 600e5 and self.commercial_value <= 800e5
