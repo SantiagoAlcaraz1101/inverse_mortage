@@ -34,7 +34,7 @@ class inverse_mortage(unittest.TestCase):
 
     #Verifica si puede acceder a la hipoteca inversa
     def test_normal_testcase_1(self):
-        age, stratum, commercial_value, antiqueness, is_women, is_legal = normal_testcase_1
+        age, stratum, commercial_value, antiqueness, is_women, is_legal = normal_testcase_Person_1
         result = self.normal_testcase_1(age, stratum, commercial_value, antiqueness, is_women, is_legal)
         self.assertTrue(result)
 
