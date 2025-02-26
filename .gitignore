@@ -120,3 +120,5 @@ dmypy.json
 # Visual Studio Code
 .vscode/
 *.code-workspace
+
+/__pycache__
