@@ -18,8 +18,16 @@ def property_value(T: int, initial_value: float):
 
     # Cálculo de Vt según la fórmula
     V = initial_value * np.exp((mu - 0.5 * sigma**2) * t + sigma * W)
-
+    if V[-1] < 0:
+        return 0
+    if T == 0:
+        return V[-1]
     return(V[-1]/T/12)
+
+
+v = property_value(12, 100000000)
+print(v)
+
 
 # Graficando el resultado
 #plt.plot(t, V)
