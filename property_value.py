@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 
 
 def property_value(T: int, initial_value: float):
-# Parámetros
-
+    if T == 0:
+        return initial_value * 0.75
+    # Parámetros
     mu = 0.034  # tasa de retorno
     sigma = 0.1  # volatilidad
     dt = 0.01  # tamaño del paso de tiempo
@@ -18,13 +19,8 @@ def property_value(T: int, initial_value: float):
 
     # Cálculo de Vt según la fórmula
     V = initial_value * np.exp((mu - 0.5 * sigma**2) * t + sigma * W)
-    if isinstance(V, float):
-        return V
-    return(V[-1]/T/12)
 
-
-v = property_value(0, 100000000)
-print(v)
+    return V[-1]/T/12
 
 
 # Graficando el resultado
