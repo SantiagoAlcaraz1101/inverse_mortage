@@ -1,5 +1,6 @@
 from inverse_mortage import Person, Property
 from exceptions import *
+from property_value import property_value
 #Variables de entrada:
 """
 --------Propietario---------
@@ -19,19 +20,20 @@ def input_data_person():
     print("------------Bienvenido-----------\n-Calculadora de Hipoteca Inversa-")
     name = str(input("Ingresa tu nombre: "))
     age = int(input("Ingresa tu edad: "))
-    gender = str(input("Ingrese S: Si eres mujer, N:Si eres Hombre"))
+
+    gender = str(input("Ingrese S: Si eres mujer:\nN:Si eres Hombre:\n->"))
     if gender.lower == "s":
         is_women = True
     else: 
         is_women = False
-    condition = str(input("Ingrese S: Si tienes discapacidad física\n N:No tienes discapacidad\n:"))
+    condition = str(input("Ingrese S: Si tienes discapacidad física\n N:No tienes discapacidad\n->"))
     if condition.lower() == "s":
         discapacity_condition = True
     else: 
         discapacity_condition = False
 
 
-    title = str(input("Ingresa S: Si la propiedad está a tu nombre:\n: No está a tu nombre:\n: "))
+    title = str(input("Ingresa S: Si la propiedad está a tu nombre:\n: No está a tu nombre:\n-> "))
     if title.lower() == "s":
         title_property = True
     else:
@@ -59,8 +61,14 @@ def console(persona:Person, propiedad: Property):
     try:
         persona.is_old_enough()
         persona.hope_of_life()
-    except:
-        raise OldAgeShorter()
+        propiedad.is_value_enough()
+        propiedad.is_property_valid()
+        propiedad.required_stratum()
+
+        cuota = property_value(persona.hope_of_life(), propiedad.commercial_value)
+        print(f"El valor de tu cuota es: {cuota}")
+    except (OldAgeError, PropertyValueError, PropertyAntiquenessBigger, StratumError) as e:
+        print("Error:", e)
 
 
 
@@ -70,8 +78,6 @@ if __name__ == "__main__":
     stratum, commercial_value, antiqueness, legality = input_data_property()
     propiedad = Property(stratum=stratum, commercial_value=commercial_value, antiqueness=antiqueness, legality=legality)
     usuario= Person(name=name, age=age, is_women=is_women, discapacity_condition=discapacity_condition, property=propiedad, property_title=title_property)
-    input_data_person()
-    input_data_property()
     console(usuario, propiedad)
 
 
