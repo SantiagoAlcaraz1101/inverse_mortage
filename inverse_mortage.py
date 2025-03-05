@@ -12,7 +12,7 @@ class Property:
         return True
     
     def required_stratum(self) -> bool:
-        if self.stratum <= 4 or self.stratum > 6:
+        if self.stratum < 4 or self.stratum > 6:
             raise StratumError()
         return True
     
