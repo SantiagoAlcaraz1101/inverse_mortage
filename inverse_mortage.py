@@ -1,4 +1,4 @@
-
+from exceptions import *
 class Property:
     def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool):
         self.stratum: int = stratum
@@ -7,13 +7,19 @@ class Property:
         self.legality: bool = legality
 
     def is_property_valid(self):
-        return self.antiqueness <= 25
+        if self.antiqueness > 25:
+            raise PropertyAntiquenessBigger()
+        return True
     
     def required_stratum(self) -> bool:
-        return self.stratum >= 4
+        if self.stratum < 4 or self.stratum > 6:
+            raise StratumError()
+        return True
     
     def is_value_enough(self) -> bool:
-        return self.commercial_value >= 600e5 and self.commercial_value <= 800e5
+        if self.commercial_value < 600e6 or self.commercial_value >= 800e6:
+            raise PropertyValueError()
+        return True
     
     def cal_value_property(self, V0: float, mu: float, sigma: float, T: int, dt: float):
         import numpy as np
@@ -61,7 +67,9 @@ class Person:
         
 
     def is_old_enough(self) -> bool:
-        return self.age >=65
+        if self.age < 65 or self.age >= 80:
+            raise OldAgeError()
+        return True
 
     def hope_of_life(self) -> int:
         if self.is_women:
