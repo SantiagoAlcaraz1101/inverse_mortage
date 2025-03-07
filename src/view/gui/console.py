@@ -1,6 +1,6 @@
 import sys 
 sys.path.append("src")
-from model.inverse_mortage import *
+from model.inverse_mortage import Person, Property
 from model.exceptions import *
 from model.property_value import property_value
 #Variables de entrada:
@@ -68,7 +68,7 @@ def console(persona:Person, propiedad: Property):
         propiedad.required_stratum()
 
         cuota = property_value(persona.hope_of_life(), propiedad.commercial_value)
-        print(f"El valor de tu cuota es: {cuota}")
+        print(f"{persona.name}, El valor de tu cuota es: {cuota}")
     except (OldAgeError, PropertyValueError, PropertyAntiquenessBigger, StratumError) as e:
         print("Error:", e)
 

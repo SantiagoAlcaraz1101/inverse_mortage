@@ -17,6 +17,6 @@ def property_value(left_years: int, initial_value: float):
     W = np.cumsum(W) 
 
     # Cálculo de Vt según la fórmula
-    V = initial_value * np.exp((return_rate - 0.5 * volatibility**2) * time_vector + volatibility * W)
+    V = initial_value*(0.75) * np.exp((return_rate - 0.5 * volatibility**2) * time_vector + volatibility * W)
 
     return V[-1]/left_years/12
