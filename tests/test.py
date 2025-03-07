@@ -1,6 +1,6 @@
 import unittest
-from inverse_mortage import Person, Property
-from exceptions import *
+from inverse_mortage.inverse_mortage import Person, Property
+from errors.exceptions import *
 
 
 # Casos normales

@@ -1,6 +1,6 @@
-from inverse_mortage import Person, Property
-from exceptions import *
-from property_value import property_value
+from inverse_mortage.inverse_mortage import *
+from errors.exceptions import *
+from inverse_mortage.property_value import property_value
 #Variables de entrada:
 """
 --------Propietario---------
