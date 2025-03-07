@@ -1,6 +1,8 @@
-from inverse_mortage.inverse_mortage import *
-from errors.exceptions import *
-from inverse_mortage.property_value import property_value
+import sys 
+sys.path.append("src")
+from model.inverse_mortage import *
+from model.exceptions import *
+from model.property_value import property_value
 #Variables de entrada:
 """
 --------Propietario---------

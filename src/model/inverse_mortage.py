@@ -1,4 +1,6 @@
-from errors.exceptions import *
+import sys 
+sys.path.append("src")
+from model.exceptions import *
 class Property:
     def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool):
         self.stratum: int = stratum

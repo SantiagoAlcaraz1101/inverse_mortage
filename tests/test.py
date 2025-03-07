@@ -1,6 +1,9 @@
 import unittest
-from inverse_mortage.inverse_mortage import Person, Property
-from errors.exceptions import *
+import sys 
+sys.path.append("src")
+
+from model.inverse_mortage import Person, Property
+from model.exceptions import *
 
 
 # Casos normales
