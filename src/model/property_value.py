@@ -5,18 +5,19 @@ import matplotlib.pyplot as plt
 
 def property_value(left_years: int, initial_value: float):
     if left_years == 0:
-        return initial_value * 0.75
+        return initial_value * deprecation_value
     # Parameters
-    return_rate = 0.034
-    volatibility = 0.05
-    time_span = 0.01  
+    deprecation_value:float = 0.75
+    return_rate:float = 0.034
+    volatibility:float = 0.05
+    time_span:float = 0.01  
     n_steps = int(left_years / time_span)  
     time_vector = np.linspace(0, left_years, n_steps) 
 
-    W = np.random.normal(0, np.sqrt(time_span), size=n_steps)  
-    W = np.cumsum(W) 
+    noise_vector = np.random.normal(0, np.sqrt(time_span), size=n_steps)  
+    noise_vector = np.cumsum(noise_vector) 
 
     # Cálculo de Vt según la fórmula
-    V = initial_value*(0.75) * np.exp((return_rate - 0.5 * volatibility**2) * time_vector + volatibility * W)
+    value_vector = initial_value*deprecation_value * np.exp((return_rate - 0.5 * volatibility**2) * time_vector + volatibility * noise_vector)
 
-    return V[-1]/left_years/12
+    return value_vector[-1]/left_years/12
