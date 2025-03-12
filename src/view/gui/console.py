@@ -59,16 +59,16 @@ def input_data_property():
     return stratum, commercial_value, antiqueness, legality
 
 
-def console(persona:Person, propiedad: Property):
+def console(person_object:Person, propiedad: Property):
     try:
-        persona.is_old_enough()
-        persona.hope_of_life()
+        person_object.is_old_enough()
+        person_object.hope_of_life()
         propiedad.is_value_enough()
         propiedad.is_property_valid()
         propiedad.required_stratum()
 
-        cuota = property_value(persona.hope_of_life(), propiedad.commercial_value)
-        print(f"{persona.name}, El valor de tu cuota es: {cuota}")
+        cuota = property_value(person_object.hope_of_life(), propiedad.commercial_value)
+        print(f"{person_object.name}, El valor de tu cuota es: {cuota}")
     except (OldAgeError, PropertyValueError, PropertyAntiquenessBigger, StratumError) as e:
         print("Error:", e)
 
