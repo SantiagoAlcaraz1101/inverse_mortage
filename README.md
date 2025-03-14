@@ -16,6 +16,14 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 
 ## Funcionalidades
 
+### Como ejecutarlo:
+
+pip install numpy
+
+py src/view/gui/console.py
+
+ se debe ejecutar desde la carpeta raiz para su correcto funcionamiento
+
 ### Ingreso de Datos:
 
 - Valor de la vivienda.
@@ -23,6 +31,7 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 - Edad del solicitante.
 
 - Tasas de interés y condiciones del préstamo.
+
 
 ### Cálculo de Pago Mensual:
 
