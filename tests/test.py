@@ -5,114 +5,134 @@ sys.path.append("src")
 from model.inverse_mortage import Person, Property
 from model.exceptions import *
 
+class TestInverseMortage(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        #Normal Cases
+        cls.normal_testcase_Property_1 = Property(4, 655e5, 25, True)
+        cls.normal_testcase_Person_1 = Person("Pepito Perez Vaquero", 65, True, False, cls.normal_testcase_Property_1, True)
 
-# Casos normales
+        cls.normal_testcase_Property_2 = Property(6, 750e5, 7, True)
+        cls.normal_testcase_Person_2 = Person("Sol Baquero", 66, True, False, cls.normal_testcase_Property_2, True)
 
-normal_testcase_Property_1 = Property(4, 655e5, 25, True)
-normal_testcase_Person_1 = Person("Pepito Perez Vaquero", 65, True, False, normal_testcase_Property_1, True)
+        cls.normal_testcase_Property_3 = Property(4, 655e5, 1, False)
+        cls.normal_testcase_Person_3 = Person("Anastacia Caly", 71, True,False, cls.normal_testcase_Property_3, True)
 
-normal_testcase_Property_2 = Property(6, 750e5, 7, True)
-normal_testcase_Person_2 = Person("Sol Baquero", 66, True, False, normal_testcase_Property_2, True)
+        # Extraordinary Cases
+        cls.extraordinary_testcase_Property_1 = Property(4, 655e5, 25, True)
+        cls.extraordinary_testcase_Person_1 = Person("Pepito Perez Vaquero", 85, False, False, cls.extraordinary_testcase_Property_1, True)
 
-normal_testcase_Property_3 = Property(4, 655e5, 1, False)
-normal_testcase_Person_3 = Person("Anastacia Caly", 71, True,False, normal_testcase_Property_3, True)
+        cls.extraordinary_testcase_Property_2 = Property(5, 655e5, 15, False)
+        cls.extraordinary_testcase_Person_2 = Person("Juanito Monsalve Castrillon", 70, False, False, cls.extraordinary_testcase_Property_2, True)
 
-# Casos extraordinarios
+        cls.extraordinary_testcase_Property_3 = Property(5, 655e5, 15, True)
+        cls.extraordinary_testcase_Person_3 = Person("Carlos Sanchez", 60, False, True, cls.extraordinary_testcase_Property_3, True)
 
-extraordinary_testcase_Property_1 = Property(4, 655e5, 25, True)
-extraordinary_testcase_Person_1 = Person("Pepito Perez Vaquero", 85, False, False, extraordinary_testcase_Property_1, True)
+        # Fail Cases
 
-extraordinary_testcase_Property_2 = Property(5, 655e5, 15, False)
-extraordinary_testcase_Person_2 = Person("Juanito Monsalve Castrillon", 70, False, False, extraordinary_testcase_Property_2, True)
+        cls.fail_testcase_Property_1 = Property(4, 655e5, 25, True)
+        cls.fail_testcase_Person_1 = Person("Pepito Perez Vaquero", 65, True, False, cls.fail_testcase_Property_1, False)
 
-extraordinary_testcase_Property_3 = Property(5, 655e5, 15, True)
-extraordinary_testcase_Person_3 = Person("Carlos Sanchez", 60, False, True, extraordinary_testcase_Property_3, True)
+        cls.fail_testcase_Property_2 = Property(7, 750e5, 18, True)
+        cls.fail_testcase_Person_2 = Person("Sol Baquero", 66, True, False, cls.fail_testcase_Property_2, True)
 
-# Casos de fallo
+        cls.fail_testcase_Property_3 = Property(4, 1000e5, 1, False)
+        cls.fail_testcase_Person_3 = Person("Anastacia Caly", 71, True,False, cls.fail_testcase_Property_3, True)
 
-fail_testcase_Property_1 = Property(4, 655e5, 25, True)
-fail_testcase_Person_1 = Person("Pepito Perez Vaquero", 65, True, False, fail_testcase_Property_1, False)
+    @classmethod
+    def tearDownClass(cls):
+        del cls.normal_testcase_Property_1
+        del cls.normal_testcase_Person_1
+        del cls.normal_testcase_Property_2
+        del cls.normal_testcase_Person_2
+        del cls.normal_testcase_Property_3
+        del cls.normal_testcase_Person_3
+        del cls.extraordinary_testcase_Property_1
+        del cls.extraordinary_testcase_Person_1
+        del cls.extraordinary_testcase_Property_2
+        del cls.extraordinary_testcase_Person_2
+        del cls.extraordinary_testcase_Property_3
+        del cls.extraordinary_testcase_Person_3
+        del cls.fail_testcase_Property_1
+        del cls.fail_testcase_Person_1
+        del cls.fail_testcase_Property_2
+        del cls.fail_testcase_Person_2
+        del cls.fail_testcase_Property_3
+        del cls.fail_testcase_Person_3
 
-fail_testcase_Property_2 = Property(7, 750e5, 18, True)
-fail_testcase_Person_2 = Person("Sol Baquero", 66, True, False, fail_testcase_Property_2, True)
 
-fail_testcase_Property_3 = Property(4, 1000e5, 1, False)
-fail_testcase_Person_3 = Person("Anastacia Caly", 71, True,False, fail_testcase_Property_3, True)
-
-
-class inverse_mortage(unittest.TestCase):
     
     def test_normal_1(self):
         with self.assertRaises(PropertyValueError):
-            normal_testcase_Property_1.is_value_enough()
-        self.assertTrue(normal_testcase_Person_1.is_old_enough())
-        self.assertTrue(normal_testcase_Property_1.required_stratum())
-        self.assertTrue(normal_testcase_Property_1.is_property_valid())
-        self.assertEqual(normal_testcase_Person_1.hope_of_life(), 13)
+            self.normal_testcase_Property_1.is_value_enough()
+        self.assertTrue(self.normal_testcase_Person_1.is_old_enough())
+        self.assertTrue(self.normal_testcase_Property_1.required_stratum())
+        self.assertTrue(self.normal_testcase_Property_1.is_property_valid())
+        self.assertEqual(self.normal_testcase_Person_1.hope_of_life(), 13)
 
     def test_normal_2(self):
         with self.assertRaises(PropertyValueError):
-            normal_testcase_Property_2.is_value_enough()
-        self.assertTrue(normal_testcase_Person_2.is_old_enough())
-        self.assertTrue(normal_testcase_Property_2.required_stratum())
-        self.assertTrue(normal_testcase_Property_2.is_property_valid())
-        self.assertEqual(normal_testcase_Person_2.hope_of_life(), 12)
+            self.normal_testcase_Property_2.is_value_enough()
+        self.assertTrue(self.normal_testcase_Person_2.is_old_enough())
+        self.assertTrue(self.normal_testcase_Property_2.required_stratum())
+        self.assertTrue(self.normal_testcase_Property_2.is_property_valid())
+        self.assertEqual(self.normal_testcase_Person_2.hope_of_life(), 12)
 
     def test_normal_3(self):
         with self.assertRaises(PropertyValueError):
-            normal_testcase_Property_3.is_value_enough()
-        self.assertTrue(normal_testcase_Person_3.is_old_enough())
-        self.assertTrue(normal_testcase_Property_3.required_stratum())
-        self.assertTrue(normal_testcase_Property_3.is_property_valid())
-        self.assertEqual(normal_testcase_Person_3.hope_of_life(), 7)
+            self.normal_testcase_Property_3.is_value_enough()
+        self.assertTrue(self.normal_testcase_Person_3.is_old_enough())
+        self.assertTrue(self.normal_testcase_Property_3.required_stratum())
+        self.assertTrue(self.normal_testcase_Property_3.is_property_valid())
+        self.assertEqual(self.normal_testcase_Person_3.hope_of_life(), 7)
 
     def test_extraordinary_1(self):
-        self.assertTrue(extraordinary_testcase_Property_1.required_stratum())
-        self.assertEqual(extraordinary_testcase_Person_1.hope_of_life(), 0)
+        self.assertTrue(self.extraordinary_testcase_Property_1.required_stratum())
+        self.assertEqual(self.extraordinary_testcase_Person_1.hope_of_life(), 0)
         with self.assertRaises(OldAgeError):
-            extraordinary_testcase_Person_1.is_old_enough()
+            self.extraordinary_testcase_Person_1.is_old_enough()
         with self.assertRaises(PropertyValueError):
-            extraordinary_testcase_Property_1.is_value_enough()
+            self.extraordinary_testcase_Property_1.is_value_enough()
 
     def test_extraordinary_2(self):
         with self.assertRaises(PropertyValueError):
-            extraordinary_testcase_Property_2.is_value_enough()
-        self.assertTrue(extraordinary_testcase_Property_2.required_stratum())
-        self.assertTrue(extraordinary_testcase_Property_2.is_property_valid())
-        self.assertEqual(extraordinary_testcase_Person_2.hope_of_life(), 1)
+            self.extraordinary_testcase_Property_2.is_value_enough()
+        self.assertTrue(self.extraordinary_testcase_Property_2.required_stratum())
+        self.assertTrue(self.extraordinary_testcase_Property_2.is_property_valid())
+        self.assertEqual(self.extraordinary_testcase_Person_2.hope_of_life(), 1)
 
     def test_extraordinary_3(self):
         with self.assertRaises(OldAgeError):
-            extraordinary_testcase_Person_3.is_old_enough()
+            self.extraordinary_testcase_Person_3.is_old_enough()
         with self.assertRaises(PropertyValueError):
-            extraordinary_testcase_Property_3.is_value_enough()
+            self.extraordinary_testcase_Property_3.is_value_enough()
         with self.assertRaises(PropertyValueError):
-            extraordinary_testcase_Property_3.is_value_enough()
-        self.assertTrue(extraordinary_testcase_Property_3.required_stratum())
-        self.assertEqual(extraordinary_testcase_Person_3.hope_of_life(), 11)
+            self.extraordinary_testcase_Property_3.is_value_enough()
+        self.assertTrue(self.extraordinary_testcase_Property_3.required_stratum())
+        self.assertEqual(self.extraordinary_testcase_Person_3.hope_of_life(), 11)
 
     def test_fail_1(self):
         with self.assertRaises(PropertyValueError):
-            fail_testcase_Property_1.is_value_enough()
-        self.assertTrue(fail_testcase_Person_1.is_old_enough())
-        self.assertTrue(fail_testcase_Property_1.required_stratum())
-        self.assertTrue(fail_testcase_Property_1.is_property_valid())
-        self.assertEqual(fail_testcase_Person_1.hope_of_life(), 13)
+            self.fail_testcase_Property_1.is_value_enough()
+        self.assertTrue(self.fail_testcase_Person_1.is_old_enough())
+        self.assertTrue(self.fail_testcase_Property_1.required_stratum())
+        self.assertTrue(self.fail_testcase_Property_1.is_property_valid())
+        self.assertEqual(self.fail_testcase_Person_1.hope_of_life(), 13)
 
     def test_fail_2(self):
         with self.assertRaises(PropertyValueError):
-            fail_testcase_Property_2.is_value_enough()
-        self.assertTrue(fail_testcase_Person_2.is_old_enough())
-        self.assertTrue(fail_testcase_Property_2.is_property_valid())
-        self.assertEqual(fail_testcase_Person_2.hope_of_life(), 12)
+            self.fail_testcase_Property_2.is_value_enough()
+        self.assertTrue(self.fail_testcase_Person_2.is_old_enough())
+        self.assertTrue(self.fail_testcase_Property_2.is_property_valid())
+        self.assertEqual(self.fail_testcase_Person_2.hope_of_life(), 12)
 
     def test_fail_3(self):
         with self.assertRaises(PropertyValueError):
-            fail_testcase_Property_2.is_value_enough()
-        self.assertTrue(fail_testcase_Person_3.is_old_enough())
-        self.assertTrue(fail_testcase_Property_3.required_stratum())
-        self.assertTrue(fail_testcase_Property_3.is_property_valid())
-        self.assertEqual(fail_testcase_Person_3.hope_of_life(), 7)
+            self.fail_testcase_Property_2.is_value_enough()
+        self.assertTrue(self.fail_testcase_Person_3.is_old_enough())
+        self.assertTrue(self.fail_testcase_Property_3.required_stratum())
+        self.assertTrue(self.fail_testcase_Property_3.is_property_valid())
+        self.assertEqual(self.fail_testcase_Person_3.hope_of_life(), 7)
     
 
 if __name__ == "__main__":
