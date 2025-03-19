@@ -36,6 +36,62 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 - Permitir la descarga de los resultados en formatos CSV o PDF.
 
 
+## Estructura del Proyecto
+
+La estructura de carpetas y archivos del proyecto es la siguiente:
+
+```
+/root/
+├── README.md
+├── src/
+│   ├── main.py
+│   ├── calculations/
+│   │   ├── __init__.py
+│   │   ├── mortgage_calculator.py
+│   │   └── report_generator.py
+│   ├── ui/
+│   │   ├── __init__.py
+│   │   ├── web_interface.py
+│   │   └── cli_interface.py
+│   └── utils/
+│       ├── __init__.py
+│       ├── data_validation.py
+│       └── file_exporter.py
+├── tests/
+│   ├── test_calculations.py
+│   ├── test_ui.py
+│   └── test_utils.py
+├── requirements.txt
+├── .gitignore
+└── docs/
+    ├── project_documentation.md
+    └── api_reference.md
+```
+
+### Instrucciones para Pruebas Unitarias
+
+1. Configura un framework de pruebas con `unittest`
+2. Crea archivos de prueba separados, como `test_<nombre_del_módulo>.py`.
+3. Ejecuta las pruebas con herramientas `python -m unittest`.
+
+
+### Descripción de Carpetas y Archivos
+
+- **src/**: Contiene el código fuente del proyecto.
+  - **main.py**: Archivo principal para ejecutar la aplicación.
+  - **calculations/**: Módulo para cálculos financieros y generación de reportes.
+  - **ui/**: Módulo para la interfaz de usuario, ya sea web o CLI.
+  - **utils/**: Utilidades generales como validación de datos y exportación de archivos.
+
+- **tests/**: Contiene los archivos de pruebas unitarias para los diferentes módulos.
+
+- **requirements.txt**: Lista de dependencias del proyecto.
+
+- **.gitignore**: Archivo para especificar qué archivos o carpetas deben ser ignorados por Git.
+
+- **docs/**: Documentación adicional del proyecto, como especificaciones y referencias de la API.
+
+
 ## Casos de Estudio
 
 Los casos específicos para el análisis del proyecto se encuentran en el siguiente enlace de Google Sheets:
