@@ -4,6 +4,13 @@
 
 Este proyecto de aula tiene como objetivo desarrollar un sistema que permita simular y analizar el funcionamiento de la hipoteca inversa. Se busca proporcionar herramientas para calcular y visualizar escenarios en los que una persona pueda convertir su vivienda en una fuente de ingresos sin perder su propiedad mientras viva.
 
+## Equipo de Trabajo
+
+- Nombre del docente: William David Velásquez
+
+- Integrantes del equipo: Emanuel García Rios y Juan José Becerra
+
+
 ## Objetivos
 
 - Implementar un sistema que simule la hipoteca inversa.
@@ -110,11 +117,6 @@ https://docs.google.com/spreadsheets/d/13gb_k_L8XEZlQfSJO_waRds3wgISHP0f5UH5qSc5
 ## Artículo sobre Hipoteca Inversa - Universidad de Medellín
 https://repository.udem.edu.co/bitstream/handle/11407/6356/T_MF_436.pdf?sequence=2&isAllowed=y
 
-## Equipo de Trabajo
-
-- Nombre del docente: William David Velásquez
-
-- Integrantes del equipo: Emanuel García Rios y Juan José Becerra
 
 ## Tecnologías Utilizadas
 
