@@ -1,5 +1,6 @@
 import sys 
-sys.path.append("src")
+import os
+sys.path.append(os.path.abspath("src"))
 from model.inverse_mortage import Person, Property
 from model.exceptions import *
 from model.property_value import property_value
