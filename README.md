@@ -36,7 +36,7 @@ py src/view/console/console.py
 
 #### Correr por Interfaz Grafica
 
-py /src/view/gui/main.py
+py src/view/gui/main.py
 
 
 en ambos casos se debe ejecutar desde la carpeta raiz para su correcto funcionamiento
