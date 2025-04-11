@@ -59,6 +59,42 @@ class MortgageForm(BoxLayout):
             if any(v == '' for v in data.values()):
                 raise ValueError("Ingrese todos los datos")
 
+            try:
+                age = int(data["age"])
+            except ValueError:
+                raise ValueError("La edad debe ser un número entero válido.")
+
+            # Validación del estrato (debe ser un número entero)
+            try:
+                stratum = int(data["stratum"])
+            except ValueError:
+                raise ValueError("El estrato debe ser un número entero válido.")
+
+            # Validación del valor comercial (debe ser un número flotante)
+            try:
+                commercial_value = float(data["commercial_value"])
+            except ValueError:
+                raise ValueError("El valor comercial debe ser un número válido.")
+
+            # Validación de antigüedad (debe ser un número entero)
+            try:
+                antiqueness = int(data["antiqueness"])
+            except ValueError:
+                raise ValueError("La antigüedad debe ser un número entero válido.")
+
+            # Validación de sí/no para campos booleanos
+            def validate_yes_no(value, field_name):
+                if value not in ["si", "no"]:
+                    raise ValueError(f"El valor para {field_name} debe ser 'si' o 'no'.")
+                return value == "si"
+
+            
+            is_women = validate_yes_no(data["is_women"], "¿Es mujer?")
+            discapacity_condition = validate_yes_no(data["discapacity_condition"], "¿Tiene discapacidad?")
+            legality = validate_yes_no(data["legality"], "¿Es legal la propiedad?")
+            taxes_ok = validate_yes_no(data["taxes_ok"], "¿Está al día con impuestos?")
+            property_title = validate_yes_no(data["property_title"], "¿Tiene título de propiedad?")
+            # Crear la persona y la propiedad
             person = Person(
                 name=data["name"],
                 age=int(data["age"]),
@@ -73,6 +109,7 @@ class MortgageForm(BoxLayout):
                 ),
                 property_title=data["property_title"] == "si"
             )
+            
 
             person.is_old_enough()
             person.property.required_stratum()
@@ -85,9 +122,6 @@ class MortgageForm(BoxLayout):
 
         except (PropertyAntiquenessBigger, PropertyValueError, StratumError, OldAgeError) as e:
             self.show_popup("Error de Validación", str(e))
-
-        except ValueError as e:
-            self.show_popup("Error", str(e))
 
         except Exception as e:
             self.show_popup("Error", f"Entrada inválida o error inesperado:\n{str(e)}")
