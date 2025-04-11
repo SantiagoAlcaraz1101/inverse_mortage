@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 
 
 def property_value(left_years: int, initial_value: float):
+    deprecation_value:float = 0.75
     if left_years == 0:
         return initial_value * deprecation_value
     # Parameters
-    deprecation_value:float = 0.75
+    
     return_rate:float = 0.034
     volatibility:float = 0.05
     time_span:float = 0.01  
