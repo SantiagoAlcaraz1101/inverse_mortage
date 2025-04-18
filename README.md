@@ -10,6 +10,8 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 
 - Integrantes del equipo: Emanuel García Rios y Juan José Becerra
 
+- Integrantes GUI: Miguel Angel Salas, Juan Esteban Marin
+
 
 ## Objetivos
 
@@ -26,10 +28,18 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 ### Como ejecutarlo:
 
 pip install numpy
+pip install kivy
 
-py src/view/gui/console.py
+#### Correr por consola
 
- se debe ejecutar desde la carpeta raiz para su correcto funcionamiento
+py src/view/console/console.py
+
+#### Correr por Interfaz Grafica
+
+py src/view/gui/main.py
+
+
+en ambos casos se debe ejecutar desde la carpeta raiz para su correcto funcionamiento
 
 ### Ingreso de Datos:
 
@@ -128,4 +138,4 @@ https://repository.udem.edu.co/bitstream/handle/11407/6356/T_MF_436.pdf?sequence
 
 - Bibliotecas para cálculos financieros: NumPy, Pandas
 
-- Generación de gráficos: Matplotlib, Seaborn
+- Generación de gráficos: Matplotlib, Seaborn, kivy

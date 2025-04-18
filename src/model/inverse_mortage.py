@@ -1,27 +1,34 @@
 import sys 
 sys.path.append("src")
-from model.exceptions import *
+from .exceptions import PropertyAntiquenessBigger, PropertyValueError, StratumError, OldAgeError
+
 class Property:
-    def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool):
-        self.stratum: int = stratum
-        self.commercial_value: float = commercial_value
-        self.antiqueness: int = antiqueness
-        self.legality: bool = legality
+    def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool, taxes_ok: bool):
+        self.stratum = stratum
+        self.commercial_value = commercial_value
+        self.antiqueness = antiqueness
+        self.legality = legality
+        self.taxes_ok = taxes_ok
+
+    def is_value_enough(self):
+        if self.commercial_value < 700_000_000:
+            raise PropertyValueError("El valor comercial de la propiedad no es suficiente.")
+        return True
 
     def is_property_valid(self):
-        if self.antiqueness > 25:
-            raise PropertyAntiquenessBigger()
+        if self.antiqueness > 30:
+            raise PropertyAntiquenessBigger("La antigüedad de la propiedad es demasiado alta.")
+        if not self.legality:
+            raise PropertyValueError("La propiedad no es legal.")
+        if not self.taxes_ok:
+            raise PropertyValueError("La propiedad no está al día con los impuestos.")
         return True
-    
-    def required_stratum(self) -> bool:
-        if self.stratum < 4 or self.stratum > 6:
-            raise StratumError()
+
+    def required_stratum(self):
+        if self.stratum < 1 or self.stratum > 6:
+            raise StratumError("El estrato debe estar entre 1 y 6.")
         return True
-    
-    def is_value_enough(self) -> bool:
-        if self.commercial_value < 600e6 or self.commercial_value >= 800e6:
-            raise PropertyValueError()
-        return True
+
     
 
 class Person:
