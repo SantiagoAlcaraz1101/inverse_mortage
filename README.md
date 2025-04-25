@@ -134,8 +134,8 @@ https://repository.udem.edu.co/bitstream/handle/11407/6356/T_MF_436.pdf?sequence
 
 - Frameworks: Django / Flask (según preferencia) X
 
-- Base de Datos: SQLite X
+- Base de Datos: PostgreSql
 
-- Bibliotecas para cálculos financieros: NumPy, Pandas
+- Bibliotecas para cálculos financieros: NumPy
 
-- Generación de gráficos: Matplotlib, Seaborn, kivy
+- Generación de interfaz gráfica: kivy
