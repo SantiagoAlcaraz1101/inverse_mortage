@@ -9,30 +9,22 @@ load_dotenv()
 
 
 
-#PGHOST= os.getenv("PGHOST")
-#PGDATABASE= os.getenv("PGDATABASE")
-#PGUSER= os.getenv("PGUSER")
-#PGPASSWORD= os.getenv("PGPASSWORD")
+PGHOST= os.getenv("PGHOST")
+PGDATABASE= os.getenv("PGDATABASE")
+PGUSER= os.getenv("PGUSER")
+PGPASSWORD= os.getenv("PGPASSWORD")
 
-PGHOST='ep-bitter-scene-a48mvj5y-pooler.us-east-1.aws.neon.tech'
 
-PGDATABASE='neondb'
-
-PGUSER='neondb_owner'
-
-PGPASSWORD='npg_NGKnv35XzCmU'
-
-#def cursor():
-#    conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD)
-#    cursor = conn.cursor()
-#    return cursor
-
-def insert_propiedad(propiedad: Property):
+def main_cursor():
     conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD)
     cursor = conn.cursor()
+    return cursor
+
+def insert_propiedad(propiedad: Property):
+    cursor = main_cursor()
     try:
-        cursor.execute("INSERT INTO propiedadas (estrato, valor_comercial, antiguedad, legalidad, impuestos) VALUES (%s, %s, %s, %s, %s)",
-                       (propiedad.stratum, propiedad.commercial_value, propiedad.antiqueness, propiedad.legality, propiedad.taxes_ok))
+        insertar = f"INSERT INTO 'Propiedad' (estrato, valor_comercial, antiguedad, legalidad, impuestos) VALUES ({propiedad.stratum}, {propiedad.commercial_value}, {propiedad.antiqueness}, {propiedad.legality}, {propiedad.taxes_ok})"
+        cursor.execute(insertar)
         cursor.connection.commit()
     except Exception as e:
         print(f"Error inserting propiedad: {e}")
