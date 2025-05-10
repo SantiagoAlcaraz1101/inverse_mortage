@@ -1,22 +1,21 @@
 import psycopg2
 import sys
-from dotenv import load_dotenv
+sys.path.append("c:/Users/emanu/Desktop/inverse_mortage")  # Agrega el directorio raíz al path
+from secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
 from decimal import Decimal
 import os
 sys.path.append("src")
 
 from model.inverse_mortage import Property
-load_dotenv()
 
-
-PGHOST = os.getenv("PGHOST")
-PGDATABASE = os.getenv("PGDATABASE")
-PGUSER = os.getenv("PGUSER")
-PGPASSWORD = os.getenv("PGPASSWORD")
+# PGHOST = os.getenv("PGHOST")
+# PGDATABASE = os.getenv("PGDATABASE")
+# PGUSER = os.getenv("PGUSER")
+# PGPASSWORD = os.getenv("PGPASSWORD")
 
 
 def connect_db():
-    conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD, sslmode='require', options="endpoint=ep-bitter-scene-a48mvj5y")
+    conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD, sslmode='require')
     return conn
 
 
@@ -24,20 +23,18 @@ def insert_propiedad(propiedad: Property):
     conn = connect_db()
     cursor = conn.cursor()
     try:
-
-        cursor.execute(
-            """
-            INSERT INTO "Propiedad" (estrato, valor_comercial, antiguedad, legalidad, impuestos)
-            VALUES (%s, %s, %s, %s, %s)
-            """,
-            (
-                propiedad.stratum,
-                propiedad.commercial_value,
-                propiedad.antiqueness,
-                propiedad.legality,
-                propiedad.taxes_ok
-            )
+        with open ('src/sql/insert_property.sql', 'r') as consulta:
+            consulta = consulta.read()
+            
+        tuple_propiedad = (
+            propiedad.stratum,
+            propiedad.commercial_value,
+            propiedad.antiqueness,
+            propiedad.legality,
+            propiedad.taxes_ok
         )
+        cursor.execute(consulta, tuple_propiedad)
+            
         conn.commit()
         print("Propiedad insertada correctamente.")
     except Exception as e:
@@ -47,5 +44,5 @@ def insert_propiedad(propiedad: Property):
         conn.close()
 
 # Asegúrate de que la clase Property esté bien definida en model.inverse_mortage
-propiedad_Prueba = Property(3, Decimal("100000000"), 8, True, True)
+propiedad_Prueba = Property(3, Decimal("200000000"), 8, True, True)
 insert_propiedad(propiedad_Prueba)
