@@ -1,0 +1,1 @@
+SELECT *  FROM propiedades WHERE id_propiedad = %s

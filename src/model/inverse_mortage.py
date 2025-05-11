@@ -9,6 +9,9 @@ class Property:
         self.antiqueness = antiqueness
         self.legality = legality
         self.taxes_ok = taxes_ok
+        
+    def to_tuple(self):
+        return (self.stratum, self.commercial_value, self.antiqueness, self.legality, self.taxes_ok)
 
     def is_value_enough(self):
         if self.commercial_value < 700_000_000:
@@ -32,15 +35,17 @@ class Property:
     
 
 class Person:
-    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool, property: Property, property_title: bool):
+    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool, property_title: bool, id_property: int):
         self.name: str = name
         self.age: int = age
         self.is_women: bool = is_women
         self.discapacity_condition: bool = discapacity_condition
-        self.property: Property = property
         self.property_title: bool = property_title
+        self.id_property: int = id_property
         
-
+    def to_tuple(self):
+        return (self.name, self.age, self.is_women, self.discapacity_condition, self.property_title, self.id_property)
+    
     def is_old_enough(self) -> bool:
         if self.age < 65 or self.age >= 80:
             raise OldAgeError()

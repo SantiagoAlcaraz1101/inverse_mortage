@@ -1,0 +1,1 @@
+SELECT *  FROM personas WHERE id_persona = %s;
