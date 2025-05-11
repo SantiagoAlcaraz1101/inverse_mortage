@@ -27,6 +27,7 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 1. Instalar las dependencias necesarias:
 ```bash
 pip install numpy
+pip install matplotlib
 pip install kivy
 pip install psycopg2
 ```
@@ -36,13 +37,13 @@ pip install psycopg2
 3. Ejecutar el proyecto desde la carpeta raíz:
 - Por consola:
 ```
-py src/view/console/console.py
+python3 src/view/console/console.py
 ```
 
 - Por interfaz gráfica:
 
 ```
-py src/view/gui/main.py
+python3 src/view/gui/main.py
 ```
 
 > **Nota**: Es importante ejecutar los comandos desde la carpeta raíz para que las rutas relativas funcionen correctamente.
