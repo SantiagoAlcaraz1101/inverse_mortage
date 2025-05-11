@@ -42,13 +42,13 @@ class Property:
     
 
 class Person:
-    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool,property: Property, property_title: bool ):
+    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool, property_title: bool, property: Property ):
         self.name: str = name
         self.age: int = age
         self.is_women: bool = is_women
         self.discapacity_condition: bool = discapacity_condition
-        self.property:Property  = property
         self.property_title: bool = property_title
+        self.property:Property  = property
         
     def to_tuple(self):
         return (self.name, self.age, self.is_women, self.discapacity_condition, self.property_title, self.property.id_property)
