@@ -6,11 +6,11 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 
 ## Equipo de Trabajo
 
-- Nombre del docente: William David Velásquez
+- **Docente**: William David Velásquez
 
-- Integrantes del equipo: Emanuel García Rios y Juan José Becerra
+- **Integrantes del equipo**: Emanuel García Rios y Juan José Becerra
 
-- Integrantes GUI: Miguel Angel Salas, Juan Esteban Marin
+- **Integrantes GUI**: Miguel Angel Salas, Juan Esteban Marin
 
 
 ## Objetivos
@@ -23,23 +23,40 @@ Este proyecto de aula tiene como objetivo desarrollar un sistema que permita sim
 
 - Ofrecer una interfaz amigable para el usuario.
 
-## Funcionalidades
-
-### Como ejecutarlo:
-
+## Como ejecutarlo:
+1. Instalar las dependencias necesarias:
+```bash
 pip install numpy
 pip install kivy
+pip install psycopg2
+```
 
-#### Correr por consola
+2. Configurar las credenciales de la base de datos en la carpeta config (ver sección Configuración de Credenciales).
 
+3. Ejecutar el proyecto desde la carpeta raíz:
+- Por consola:
+```
 py src/view/console/console.py
+```
 
-#### Correr por Interfaz Grafica
+- Por interfaz gráfica:
 
+```
 py src/view/gui/main.py
+```
 
+> **Nota**: Es importante ejecutar los comandos desde la carpeta raíz para que las rutas relativas funcionen correctamente.
 
-en ambos casos se debe ejecutar desde la carpeta raiz para su correcto funcionamiento
+## Configuración de Credenciales
+Para que el proyecto funcione correctamente, debes crear un archivo llamado secret_config.py dentro de la carpeta config. Este archivo debe contener las credenciales de la base de datos PostgreSQL en el siguiente formato:
+
+```
+PGHOST = "tu_host"
+PGDATABASE = "tu_base_de_datos"
+PGUSER = "tu_usuario"
+PGPASSWORD = "tu_contraseña"
+```
+> **Nota**: Recuerda agregar quitar tus keys o agregar al gitignore.
 
 ### Ingreso de Datos:
 
@@ -67,31 +84,39 @@ en ambos casos se debe ejecutar desde la carpeta raiz para su correcto funcionam
 La estructura de carpetas y archivos del proyecto es la siguiente:
 
 ```
-/root/
+/inverse_mortage/
 ├── README.md
+├── config/
+│   └── secret_config.py
 ├── src/
-│   ├── main.py
-│   ├── calculations/
-│   │   ├── __init__.py
-│   │   ├── mortgage_calculator.py
-│   │   └── report_generator.py
-│   ├── ui/
-│   │   ├── __init__.py
-│   │   ├── web_interface.py
-│   │   └── cli_interface.py
-│   └── utils/
-│       ├── __init__.py
-│       ├── data_validation.py
-│       └── file_exporter.py
+│   ├── controller/
+│   │   ├── personas_controller.py
+│   │   └── propiedades_controller.py
+│   ├── model/
+│   │   ├── inverse_mortage.py
+│   │   ├──  exceptions.py
+│   │   └── property_value.py
+│   ├── sql/
+│   │   ├── create_table_person.sql
+│   │   ├── create_table_property.sql
+│   │   ├── delete_person.sql
+│   │   ├── delete_property.sql
+│   │   ├── insert_persona.sql
+│   │   ├── insert_property.sql
+│   │   ├── select_person.sql
+│   │   ├── select_property.sql
+│   │   ├── update_person.sql
+│   │   ├── update_propery.sql
+│   └── view/
+│       ├── console/
+│       │   └── console.py
+│       └── gui/
+│           └── main.py
 ├── tests/
-│   ├── test_calculations.py
-│   ├── test_ui.py
-│   └── test_utils.py
-├── requirements.txt
+│   ├── test.py
+├
 ├── .gitignore
-└── docs/
-    ├── project_documentation.md
-    └── api_reference.md
+
 ```
 
 ### Instrucciones para Pruebas Unitarias
@@ -99,23 +124,6 @@ La estructura de carpetas y archivos del proyecto es la siguiente:
 1. Configura un framework de pruebas con `unittest`
 2. Crea archivos de prueba separados, como `test_<nombre_del_módulo>.py`.
 3. Ejecuta las pruebas con herramientas `python -m unittest`.
-
-
-### Descripción de Carpetas y Archivos
-
-- **src/**: Contiene el código fuente del proyecto.
-  - **main.py**: Archivo principal para ejecutar la aplicación.
-  - **calculations/**: Módulo para cálculos financieros y generación de reportes.
-  - **ui/**: Módulo para la interfaz de usuario, ya sea web o CLI.
-  - **utils/**: Utilidades generales como validación de datos y exportación de archivos.
-
-- **tests/**: Contiene los archivos de pruebas unitarias para los diferentes módulos.
-
-- **requirements.txt**: Lista de dependencias del proyecto.
-
-- **.gitignore**: Archivo para especificar qué archivos o carpetas deben ser ignorados por Git.
-
-- **docs/**: Documentación adicional del proyecto, como especificaciones y referencias de la API.
 
 
 ## Casos de Estudio
@@ -135,7 +143,5 @@ https://repository.udem.edu.co/bitstream/handle/11407/6356/T_MF_436.pdf?sequence
 - Frameworks: Django / Flask (según preferencia) X
 
 - Base de Datos: PostgreSql
-
-- Bibliotecas para cálculos financieros: NumPy
 
 - Generación de interfaz gráfica: kivy
