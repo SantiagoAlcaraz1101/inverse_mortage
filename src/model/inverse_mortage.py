@@ -1,6 +1,7 @@
 import sys 
 sys.path.append("src")
 from .exceptions import PropertyAntiquenessBigger, PropertyValueError, StratumError, OldAgeError
+import hashlib
 
 class Property:
     def __init__(self, stratum: int, commercial_value: float, antiqueness: int, legality: bool, taxes_ok: bool):
@@ -9,7 +10,13 @@ class Property:
         self.antiqueness = antiqueness
         self.legality = legality
         self.taxes_ok = taxes_ok
+        self.id_property:int = self.hash_calc()
         
+    def hash_calc(self):
+        unique_string = f"{self.stratum}-{self.commercial_value}-{self.antiqueness}-{self.legality}-{self.taxes_ok}"
+        return hashlib.sha256(unique_string.encode()).hexdigest()
+
+    
     def to_tuple(self):
         return (self.stratum, self.commercial_value, self.antiqueness, self.legality, self.taxes_ok)
 
@@ -35,16 +42,16 @@ class Property:
     
 
 class Person:
-    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool, property_title: bool, id_property: int):
+    def __init__(self, name: str, age: int, is_women: bool, discapacity_condition: bool,property: Property, property_title: bool ):
         self.name: str = name
         self.age: int = age
         self.is_women: bool = is_women
         self.discapacity_condition: bool = discapacity_condition
+        self.property:Property  = property
         self.property_title: bool = property_title
-        self.id_property: int = id_property
         
     def to_tuple(self):
-        return (self.name, self.age, self.is_women, self.discapacity_condition, self.property_title, self.id_property)
+        return (self.name, self.age, self.is_women, self.discapacity_condition, self.property_title, self.property.id_property)
     
     def is_old_enough(self) -> bool:
         if self.age < 65 or self.age >= 80:
