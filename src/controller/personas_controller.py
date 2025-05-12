@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 import psycopg2
 from config.secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
 
-from src.model.inverse_mortage import Person
+from src.model.inverse_mortage import Person, Property
 
 def connect_db():
     conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD, sslmode='require')
@@ -99,7 +99,7 @@ def select_person_properties(id_person: int):
 
 # Ejemplo de uso
 create_table_people()
-persona_ejemplo = Person("James", 70, False, False, True, 6)
+persona_ejemplo = Person("James", 70, False, False, True, Property(3, 800000000, 18, True, True))
 insert_person(persona_ejemplo)
 # new_person = Person("Emanuel", 70, False, False, True, 6)
 

@@ -18,7 +18,7 @@ class Property:
 
     
     def to_tuple(self):
-        return (self.stratum, self.commercial_value, self.antiqueness, self.legality, self.taxes_ok)
+        return (self.id_property, self.stratum, self.commercial_value, self.antiqueness, self.legality, self.taxes_ok)
 
     def is_value_enough(self):
         if self.commercial_value < 700_000_000:

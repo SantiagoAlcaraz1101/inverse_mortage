@@ -1,5 +1,5 @@
 CREATE TABLE propiedades (
-    id_propiedad SERIAL PRIMARY KEY,
+    id_propiedad VARCHAR(256) PRIMARY KEY,
     estrato SMALLINT NOT NULL,
     valor_comercial REAL NOT NULL,
     antiguedad SMALLINT NOT NULL,

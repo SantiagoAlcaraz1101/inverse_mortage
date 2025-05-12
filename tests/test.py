@@ -2,8 +2,8 @@ import unittest
 import sys 
 sys.path.append("src")
 
-from model.inverse_mortage import Person, Property
-from model.exceptions import *
+from src.model.inverse_mortage import Person, Property
+from src.model.exceptions import *
 
 class TestInverseMortage(unittest.TestCase):
     @classmethod
