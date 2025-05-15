@@ -35,7 +35,7 @@ class Property:
         return True
 
     def required_stratum(self):
-        if self.stratum < 1 or self.stratum > 6:
+        if self.stratum <= 1 or self.stratum > 6:
             raise StratumError("El estrato debe estar entre 1 y 6.")
         return True
 

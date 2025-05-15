@@ -122,3 +122,7 @@ dmypy.json
 *.code-workspace
 
 /__pycache__
+
+secret_config.py
+
+/config
