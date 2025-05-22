@@ -16,7 +16,10 @@ def index():
 @app.route("/procesar", methods = ["GET", "POST"])
 def procesar():
     if request.method == "POST":
-        
+        nombre = request.form["nombre"]
+        edad = request.form["edad"]
+        genero = 
+
 
 
 if __name__ == "__main__":
