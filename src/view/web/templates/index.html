@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Hipoteca Inversa</title>
+</head>
+<body>
+    <h1>Calculadora de Hipoteca Inversa</h1>
+
+    <form action="/procesar" method="post">
+        <fieldset>
+            <legend>Propietario</legend>
+
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="age">Edad:</label>
+            <input type="number" id="age" name="age" required><br><br>
+
+            <label>Género:</label><br>
+            <input type="radio" id="woman" name="gender" value="S" required>
+            <label for="woman">Mujer</label><br>
+            <input type="radio" id="man" name="gender" value="N">
+            <label for="man">Hombre</label><br><br>
+
+            <label>Condición de discapacidad:</label><br>
+            <input type="radio" id="discapacidad_si" name="discapacity_condition" value="S" required>
+            <label for="discapacidad_si">Sí</label><br>
+            <input type="radio" id="discapacidad_no" name="discapacity_condition" value="N">
+            <label for="discapacidad_no">No</label><br><br>
+
+            <label>Título de propiedad a tu nombre:</label><br>
+            <input type="radio" id="titulo_si" name="title_property" value="S" required>
+            <label for="titulo_si">Sí</label><br>
+            <input type="radio" id="titulo_no" name="title_property" value="N">
+            <label for="titulo_no">No</label><br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Propiedad</legend>
+
+            <label for="stratum">Estrato:</label>
+            <input type="number" id="stratum" name="stratum" required><br><br>
+
+            <label for="commercial_value">Valor comercial:</label>
+            <input type="number" step="0.01" id="commercial_value" name="commercial_value" required><br><br>
+
+            <label for="antiqueness">Antigüedad (años):</label>
+            <input type="number" id="antiqueness" name="antiqueness" required><br><br>
+
+            <label>Legalidad de la propiedad:</label><br>
+            <input type="radio" id="legal_si" name="legality" value="S" required>
+            <label for="legal_si">Sí</label><br>
+            <input type="radio" id="legal_no" name="legality" value="N">
+            <label for="legal_no">No</label><br><br>
+        </fieldset>
+
+        <button type="submit">Calcular Hipoteca Inversa</button>
+    </form>
+</body>
+</html>
