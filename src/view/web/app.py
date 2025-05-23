@@ -18,7 +18,8 @@ def procesar():
     if request.method == "POST":
         nombre = request.form["nombre"]
         edad = request.form["edad"]
-        genero = 
+        genero = request.form["genero"]
+        
 
 
 
