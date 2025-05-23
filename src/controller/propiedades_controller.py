@@ -27,19 +27,17 @@ def create_table_property():
         cursor.close()
         conn.close()
 
-def insert_property(propiedad: Property):
+def insert_property(property: Property):
     conn = connect_db()
     cursor = conn.cursor()
     try:
-        with open ('src/sql/insert_property.sql', 'r') as query:
+        with open('src/sql/insert_property.sql', 'r') as query:
             query = query.read()
-            
-        cursor.execute(query, propiedad.to_tuple())
-            
+        cursor.execute(query, property.to_tuple())
         conn.commit()
         print("Propiedad insertada correctamente.")
     except Exception as e:
-        print(f"Error inserting propiedad: {e}")
+        print(f"Error inserting property: {e}")
     finally:
         cursor.close()
         conn.close()
