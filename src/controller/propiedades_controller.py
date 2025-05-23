@@ -101,8 +101,8 @@ def select_property_properties(id_property: int):
 #Ejemplo de uso
 
 create_table_property()
-propiedad_ejemplo = Property(3, 800000000, 18, True, True)
-insert_property(propiedad_ejemplo)
+# propiedad_ejemplo = Property(3, 800000000, 18, True, True)
+# insert_property(propiedad_ejemplo)
 #new_property = Property(5, 600000000, 18, True, True)
 # update_property(6, new_property)
 # select_property_properties(6)
