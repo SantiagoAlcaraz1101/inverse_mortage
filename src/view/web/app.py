@@ -18,7 +18,17 @@ def procesar():
     if request.method == "POST":
         nombre = request.form["nombre"]
         edad = request.form["edad"]
-        genero = 
+        genero = request.form["genero"]
+        discapacidad = request.form["discapacidad"]
+        titulo_propiedad = request.form["titulo_propiedad"]
+        estrato = request.form["estrato"]
+        valor_comercial = request.form["valor_comercial"]
+        antiguedad = request.form["antiguedad"]
+        legalidad = request.form["legalidad"]
+        print(f"{nombre}, {edad}, {genero}, {discapacidad}, {titulo_propiedad}, {estrato}, {valor_comercial}, {antiguedad}, {legalidad}  ")
+    return render_template("index.html")
+
+
 
 
 
