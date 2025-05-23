@@ -11,6 +11,10 @@ def connect_db():
     conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD, sslmode='require')
     return conn
 
+def get_cursor():
+    cursor = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD)
+    return cursor
+
 def create_table_people():
     conn = connect_db()
     cursor = conn.cursor()

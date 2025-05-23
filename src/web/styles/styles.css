@@ -1,0 +1,12 @@
+.titulo-principal {
+    text-align: left;
+    background-color: #e3f2fd; /* color amigable azul claro */
+    padding: 24px 32px;
+    border-radius: 12px;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1565c0;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.08);
+    margin-bottom: 24px;
+}

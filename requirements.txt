@@ -1,0 +1,12 @@
+Flask                == 3.1.0
+flask-cors           == 6.0.0
+Kivy                 == 2.3.1
+kivy_deps.angle      == 0.4.0
+kivy_deps.glew       == 0.3.1
+kivy_deps.sdl2       == 0.8.0
+Kivy-Garden          == 0.1.5
+MarkupSafe           == 3.0.2
+pip                  == 25.0.1
+psycopg2             == 2.9.10
+numpy                == 2.2.6
+matplotlib           == 3.10.3

@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personas</title>
+    <link rel="stylesheet" href="src\view\web\styles\styles.css">
+</head>
+
+<body>
+    <p>
+        Busqueda de propiedades asociadas a la cédula: {{ cedula }}
+    </p>
+
+
+    <table>
+        <h1>Resultados de la Busqueda</h1>
+        <thead style="background-color: #f2f2f2; color: #333;"></thead>
+        <tr>
+            <th>Id Propiedad</th>
+            <th>Valor Comercial</th>
+            <th>Antiguedad</th>
+            <th>Cédula</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            {% for propiedad in propiedades %}
+            <tr>
+                <td>{{ propiedad.id_propiedad }}</td>
+                <td>{{ propiedad.valor_comercial }}</td>
+                <td>{{ propiedad.antiguedad }}</td>
+                <td>{{ propiedad.cedula }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

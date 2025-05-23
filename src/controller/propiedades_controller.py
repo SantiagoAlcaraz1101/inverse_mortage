@@ -9,6 +9,10 @@ def connect_db():
     conn = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD, sslmode='require')
     return conn
 
+def get_cursor():
+    cursor = psycopg2.connect(host=PGHOST, database=PGDATABASE, user=PGUSER, password=PGPASSWORD)
+    return cursor
+
 def create_table_property():
     conn = connect_db()
     cursor = conn.cursor()
@@ -45,7 +49,7 @@ def insert_property(propiedad: Property):
         conn.close()
 
 
-def delete_property(id: int):
+def delete_property(id: str):
     
     conn = connect_db()
     cursor = conn.cursor()
@@ -98,14 +102,6 @@ def select_property_properties(id_property: int):
         cursor.close()
         conn.close()
 
-#Ejemplo de uso
 
-create_table_property()
-propiedad_ejemplo = Property(3, 800000000, 18, True, True)
-insert_property(propiedad_ejemplo)
-#new_property = Property(5, 600000000, 18, True, True)
-# update_property(6, new_property)
-# select_property_properties(6)
-# delete_person(1)
-# delete_property(3)
+
 
