@@ -7,4 +7,5 @@ CREATE TABLE personas(
     posee_titulo_propiedad BOOLEAN NOT NULL,
     id_propiedad VARCHAR (256) NOT NULL,
     CONSTRAINT fk_propiedad FOREIGN KEY (id_propiedad) REFERENCES propiedades(id_propiedad)
+    
 )

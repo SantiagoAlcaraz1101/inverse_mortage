@@ -7,19 +7,40 @@
 </head>
 
 <body>
-    <h1>Buscar</h1>
-    <form action="/lista_propiedades" >
+    <form action="/lista_propiedades"></form>
         <h1>Buscar persona</h1>
-
-        <p> Ingrese el número de cédula de la persona para buscar sus propiedades asociadas</p>
-
-        <div
+        <p>Ingrese el número de cédula de la persona para buscar sus propiedades asociadas</p>
+        <div>
             Cédula: <input type="text" name="cedula" required>
         </div>
         <div>
             <input type="submit" value="Buscar">
         </div>
     </form>
-</body>
 
+    <h2>Lista de Personas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Seleccionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{ persona.id }}</td>
+                <td>{{ persona.nombre }}</td>
+                <td>
+                    <form action="/lista_personas" method="get" style="margin:0;">
+                        <input type="hidden" name="id" value="{{ persona.id }}">
+                        <input type="submit" value="Seleccionar">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
 </html>
