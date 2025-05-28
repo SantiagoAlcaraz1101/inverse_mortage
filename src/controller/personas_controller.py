@@ -102,9 +102,9 @@ def select_person_properties(id_person: int):
         conn.close()
 
 # Ejemplo de uso
-#create_table_people()
+create_table_people()
 #persona_ejemplo = Person("James", 70, False, False, True, Property(3, 800000000, 18, True, True))
-#insert_person(persona_ejemplo)
+# insert_person(persona_ejemplo)
 # new_person = Person("Emanuel", 70, False, False, True, 6)
 
 
