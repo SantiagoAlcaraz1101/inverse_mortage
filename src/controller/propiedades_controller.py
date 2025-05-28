@@ -79,7 +79,22 @@ def update_property(id: int, property: Property):
         cursor.close()
         conn.close()
 
+def buscar_propiedades_por_nombre(nombre: str):
+    conn = connect_db()
+    cursor = conn.cursor()
+    try:
+        with open('src/sql/select_properties_by_name.sql', 'r') as file:
+            query = file.read()
+        cursor.execute(query, (f"%{nombre}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(f"Error buscando propiedades por nombre: {e}")
+        return []
+    finally:
+        cursor.close()
+        conn.close()
 
+        
 def select_property_properties(id_property: int):
     conn = connect_db()
     cursor = conn.cursor()

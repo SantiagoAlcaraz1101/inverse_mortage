@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+    <input type="text" name="nombre" placeholder="Nombre de la persona" required>
+    <button type="submit">Buscar</button>
+
+    {% if propiedades %}
+    <h2>Propiedades encontradas:</h2>
+    <ul>
+{% for propiedad in propiedades %}
+    <p><strong>Estrato:</strong> {{ propiedad[0] }}</p>
+    <p><strong>Valor comercial:</strong> {{ propiedad[1] }}</p>
+    <p><strong>Antigüedad:</strong> {{ propiedad[2] }} años</p>
+    <p><strong>Legalidad:</strong> {{ 'Sí' if propiedad[3] else 'No' }}</p>
+    <p><strong>Título de propiedad:</strong> {{ 'Sí' if propiedad[4] else 'No' }}</p>
+    <hr>
+{% endfor %}
+
+    </ul>
+{% elif request.method == 'POST' %}
+    <p>No se encontraron propiedades para ese nombre.</p>
+{% endif %}
+</form>
+
+<form action="/" method="get">
+    <button type="submit" style="margin-top:20px;">Volver al inicio</button>
+</form>
+
+</body>
+</html>
+
+
+

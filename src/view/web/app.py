@@ -43,6 +43,19 @@ def procesar():
 
     return render_template("index.html")
 
+@app.route("/buscar", methods=["GET", "POST"])
+def buscar():
+    propiedades = []
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        propiedades = propiedades_controller.buscar_propiedades_por_nombre(nombre)
+        if not propiedades:
+            mensaje = f"No se encontraron propiedades a nombre de {nombre}."
+        else:
+            mensaje = f"Propiedades encontradas para {nombre}:"
+        return render_template("buscar.html", propiedades=propiedades, mensaje=mensaje)
+    return render_template("buscar.html")
+
 
 
 
