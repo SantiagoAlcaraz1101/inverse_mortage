@@ -58,31 +58,20 @@ def buscar():
 
 from flask import redirect, url_for
 
-@app.route("/editar", methods=["GET", "POST"])
-def editar(id_propiedad):
-    propiedad = propiedades_controller.select_property_properties(id_propiedad)
-    if not propiedad:
-        return render_template("editar.html", mensaje="Propiedad no encontrada.", propiedad=None)
+# @app.route("/borrar", methods=["GET", "POST"])
+# def editar():
 
-    if request.method == "POST":
-        try:
-            estrato = int(request.form["estrato"])
-            valor_comercial = float(request.form["valor_comercial"])
-            antiguedad = int(request.form["antiguedad"])
-            legalidad = request.form["legalidad"].lower() in ["true", "1", "si", "sí"]
-            titulo_propiedad = request.form["titulo_propiedad"].lower() in ["true", "1", "si", "sí"]
+#     if request.method == "POST":
+#         try:
+#             ...
 
-            nueva_propiedad = Property(estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad)
-            propiedades_controller.update_property(id_propiedad, nueva_propiedad)
-            mensaje = "Propiedad actualizada correctamente."
-            propiedad = nueva_propiedad
-        except Exception as e:
-            print(f"Error al actualizar la propiedad: {e}")
-            mensaje = "Error al actualizar la propiedad."
-        return render_template("editar.html", mensaje=mensaje, propiedad=propiedad)
+#         except Exception as e:
+#             print(f"Error al actualizar la propiedad: {e}")
+#             mensaje = "Error al actualizar la propiedad."
+#         return render_template("borrar.html", mensaje=mensaje)
 
-    return render_template("editar.html", propiedad=propiedad)
+#     return render_template("borrar.html")
 
 
 if __name__ == "__main__":
-    app.run(debug = True, host = "0.0.0.0", port = 8080)
+    app.run()
