@@ -101,6 +101,21 @@ def select_person_properties(id_person: int):
         cursor.close()
         conn.close()
 
+def buscar_personas_por_nombre(nombre: str):
+    conn = connect_db() 
+    cursor = conn.cursor()
+    try:
+        query = "SELECT * FROM personas WHERE nombre ILIKE %s;"
+        cursor.execute(query, (f"%{nombre}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(f"Error buscando personas por nombre: {e}")
+        return []
+    finally:
+        cursor.close()
+        conn.close()
+
+
 
         def drop_and_recreate_table_people():
             conn = connect_db()
