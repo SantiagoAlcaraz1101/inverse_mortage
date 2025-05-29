@@ -1,5 +1,3 @@
-import sys
-sys.path.append(".")
 
 from src.model.inverse_mortage import Person, Property
 from src.model.exceptions import *
