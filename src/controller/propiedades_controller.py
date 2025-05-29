@@ -115,6 +115,24 @@ def select_property_properties(id_property: int):
         cursor.close()
         conn.close()
 
+        def drop_table_property():
+            conn = connect_db()
+            cursor = conn.cursor()
+            try:
+                with open('src/sql/drop_table_property.sql', 'r') as query:
+                    query = query.read()
+                cursor.execute(query)
+                conn.commit()
+                print("Tabla propiedad eliminada correctamente.")
+            except Exception as e:
+                print(f"Error eliminando la tabla propiedad: {e}")
+            finally:
+                cursor.close()
+                conn.close()
+
+        def reset_table_property():
+            drop_table_property()
+            create_table_property()
 
 create_table_property()
 # propiedad_ejemplo = Property(3, 800000000, 18, True, True)

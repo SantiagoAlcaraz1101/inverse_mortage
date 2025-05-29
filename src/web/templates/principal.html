@@ -1,14 +1,55 @@
-<html>
-    <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="src\view\web\styles\styles.css" />
-            <title>Principal</title>
-        </head>
-        <body>
-            <h1 class="titulo-principal" >Bienvenido a la Web</h1>
-            <p>Aquí podras calcular la hipoteca inversa de tu vivienda facilmente</p>
-        </body>
-
-</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú Principal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 220px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #2c3e50;
+            color: #fff;
+            padding-top: 40px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+        }
+        .sidebar a {
+            display: block;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .sidebar a:hover {
+            background: #34495e;
+        }
+        .main-content {
+            margin-left: 240px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú Principal</h2>
+        <a href="/procesar">Insertar</a>
+        <a href="/buscar">Buscar</a>
+        <a href="/eliminar">Eliminar</a>
+    </div>
+    <div class="main-content">
+        <h1>Bienvenido</h1>
+        <p>Seleccione una opción del menú para comenzar.</p>
+    </div>
+</body>
+</html></div>

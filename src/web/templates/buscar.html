@@ -1,46 +1,117 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Buscar Propiedades</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f6fa;
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 480px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 28px 24px 28px;
+        }
+        h2 {
+            color: #2d3a4b;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        form {
+            margin-bottom: 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 10px;
+            margin-bottom: 18px;
+            border: 1px solid #d1d9e6;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #f9fafb;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #4f8cff;
+            outline: none;
+        }
+        button {
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        .propiedad {
+            background: #f4f8ff;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.06);
+        }
+        .propiedad p {
+            margin: 6px 0;
+            color: #2d3a4b;
+            font-size: 1rem;
+        }
+        .volver-btn {
+            width: 100%;
+            margin-top: 18px;
+            background: #e2e8f0;
+            color: #2d3a4b;
+        }
+        .volver-btn:hover {
+            background: #cbd5e1;
+        }
+        .no-result {
+            color: #e53e3e;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
-
 <body>
-    <form action="/lista_propiedades"></form>
-        <h1>Buscar persona</h1>
-        <p>Ingrese el número de cédula de la persona para buscar sus propiedades asociadas</p>
-        <div>
-            Cédula: <input type="text" name="cedula" required>
-        </div>
-        <div>
-            <input type="submit" value="Buscar">
-        </div>
-    </form>
+    <div class="container">
+        <form method="post">
+            <input type="text" name="nombre" placeholder="Nombre de la persona" required>
+            <button type="submit">Buscar</button>
 
-    <h2>Lista de Personas</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Seleccionar</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for persona in personas %}
-            <tr>
-                <td>{{ persona.id }}</td>
-                <td>{{ persona.nombre }}</td>
-                <td>
-                    <form action="/lista_personas" method="get" style="margin:0;">
-                        <input type="hidden" name="id" value="{{ persona.id }}">
-                        <input type="submit" value="Seleccionar">
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            {% if propiedades %}
+                <h2>Propiedades encontradas:</h2>
+                {% for propiedad in propiedades %}
+                    <div class="propiedad">
+                        <p><strong>Estrato:</strong> {{ propiedad[0] }}</p>
+                        <p><strong>Valor comercial:</strong> {{ propiedad[1] }}</p>
+                        <p><strong>Antigüedad:</strong> {{ propiedad[2] }} años</p>
+                        <p><strong>Legalidad:</strong> {{ 'Sí' if propiedad[3] else 'No' }}</p>
+                        <p><strong>Título de propiedad:</strong> {{ 'Sí' if propiedad[4] else 'No' }}</p>
+                    </div>
+                {% endfor %}
+            {% elif request.method == 'POST' %}
+                <div class="no-result">No se encontraron propiedades para ese nombre.</div>
+            {% endif %}
+        </form>
+
+        <form action="/" method="get">
+            <button type="submit" class="volver-btn">Volver al inicio</button>
+        </form>
+    </div>
 </body>
 </html>
+        }

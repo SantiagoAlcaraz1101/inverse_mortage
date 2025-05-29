@@ -101,6 +101,20 @@ def select_person_properties(id_person: int):
         cursor.close()
         conn.close()
 
+
+        def drop_and_recreate_table_people():
+            conn = connect_db()
+            cursor = conn.cursor()
+            try:
+                cursor.execute("DROP TABLE IF EXISTS personas CASCADE;")
+                conn.commit()
+                print("Tabla personas eliminada correctamente.")
+                create_table_people()
+            except Exception as e:
+                print(f"Error dropping and recreating table: {e}")
+            finally:
+                cursor.close()
+                conn.close()
 # Ejemplo de uso
 create_table_people()
 #persona_ejemplo = Person("James", 70, False, False, True, Property(3, 800000000, 18, True, True))

@@ -57,6 +57,7 @@ def buscar():
         return render_template("buscar.html", propiedades=propiedades, mensaje=mensaje)
     return render_template("buscar.html")
 
+from flask import redirect, url_for
 
 
 
