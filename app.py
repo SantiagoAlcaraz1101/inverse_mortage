@@ -1,9 +1,9 @@
 
-from src.model.inverse_mortage import Person, Property
-from src.model.exceptions import *
-from src.model.property_value import property_value
-from src.controller import personas_controller 
-from src.controller import propiedades_controller
+from model.inverse_mortage import Person, Property
+from model.exceptions import *
+from model.property_value import property_value
+from controller import personas_controller 
+from controller import propiedades_controller
 
 from flask import Flask, render_template, request
 
