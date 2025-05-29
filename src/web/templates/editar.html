@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Propiedad</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 1em; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 0.5em; }
+        .mensaje { margin-bottom: 1em; color: #d9534f; }
+        .exito { color: #28a745; }
+        button { margin-top: 1em; padding: 0.5em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Editar Propiedad</h1>
+    {% if mensaje %}
+        <div class="mensaje {% if propiedad %}exito{% endif %}">{{ mensaje }}</div>
+    {% endif %}
+
+    {% if propiedad %}
+    <form method="post">
+        <label for="estrato">Estrato:</label>
+        <input type="number" id="estrato" name="estrato" min="1" max="6" required value="{{ propiedad.estrato }}">
+
+        <label for="valor_comercial">Valor Comercial:</label>
+        <input type="number" id="valor_comercial" name="valor_comercial" step="0.01" min="0" required value="{{ propiedad.valor_comercial }}">
+
+        <label for="antiguedad">Antigüedad (años):</label>
+        <input type="number" id="antiguedad" name="antiguedad" min="0" required value="{{ propiedad.antiguedad }}">
+
+        <label for="legalidad">Legalidad:</label>
+        <select id="legalidad" name="legalidad" required>
+            <option value="true" {% if propiedad.legalidad %}selected{% endif %}>Sí</option>
+            <option value="false" {% if not propiedad.legalidad %}selected{% endif %}>No</option>
+        </select>
+
+        <label for="titulo_propiedad">Título de Propiedad:</label>
+        <select id="titulo_propiedad" name="titulo_propiedad" required>
+            <option value="true" {% if propiedad.titulo_propiedad %}selected{% endif %}>Sí</option>
+            <option value="false" {% if not propiedad.titulo_propiedad %}selected{% endif %}>No</option>
+        </select>
+
+        <button type="submit">Actualizar</button>
+    </form>
+    {% else %}
+        <p>No se encontró la propiedad.</p>
+    {% endif %}
+</body>
+</html>

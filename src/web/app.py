@@ -58,26 +58,30 @@ def buscar():
 
 from flask import redirect, url_for
 
-@app.route("/eliminar", methods=["GET", "POST"])
-def eliminar():
-    mensaje = ""
+@app.route("/editar", methods=["GET", "POST"])
+def editar(id_propiedad):
+    propiedad = propiedades_controller.select_property_properties(id_propiedad)
+    if not propiedad:
+        return render_template("editar.html", mensaje="Propiedad no encontrada.", propiedad=None)
+
     if request.method == "POST":
-        nombre = request.form["nombre"]
         try:
-            persona = personas_controller.buscar_persona_por_nombre(nombre)
-            if persona:
-                # Suponiendo que persona tiene un atributo id_person
-                id_person = persona.id_person
-                propiedades_controller.eliminar_propiedades_por_nombre(nombre)
-                personas_controller.delete_person(id_person)
-                mensaje = f"Se eliminó a {nombre} y sus propiedades."
-            else:
-                mensaje = f"No se encontró a {nombre}."
+            estrato = int(request.form["estrato"])
+            valor_comercial = float(request.form["valor_comercial"])
+            antiguedad = int(request.form["antiguedad"])
+            legalidad = request.form["legalidad"].lower() in ["true", "1", "si", "sí"]
+            titulo_propiedad = request.form["titulo_propiedad"].lower() in ["true", "1", "si", "sí"]
+
+            nueva_propiedad = Property(estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad)
+            propiedades_controller.update_property(id_propiedad, nueva_propiedad)
+            mensaje = "Propiedad actualizada correctamente."
+            propiedad = nueva_propiedad
         except Exception as e:
-            print(f"Error al eliminar: {e}")
-            mensaje = "Error al eliminar la persona."
-        return render_template("eliminar.html", mensaje=mensaje)
-    return render_template("eliminar.html")
+            print(f"Error al actualizar la propiedad: {e}")
+            mensaje = "Error al actualizar la propiedad."
+        return render_template("editar.html", mensaje=mensaje, propiedad=propiedad)
+
+    return render_template("editar.html", propiedad=propiedad)
 
 
 if __name__ == "__main__":
