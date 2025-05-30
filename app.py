@@ -1,6 +1,3 @@
-import sys
-sys.path.append(".")
-
 from src.model.inverse_mortage import Person, Property
 from src.model.exceptions import *
 from src.model.property_value import property_value
@@ -54,6 +51,7 @@ def buscar():
 
 from flask import redirect, url_for
 
+
 @app.route("/eliminar/<int:propiedad_id>", methods=["POST"])
 def eliminar_propiedad(propiedad_id):
     try:
@@ -96,5 +94,7 @@ def editar_propiedad(propiedad_id):
 
 
 
+
+
 if __name__ == "__main__":
-    app.run(debug = True, host = "0.0.0.0", port = 8080)
+    app.run()
