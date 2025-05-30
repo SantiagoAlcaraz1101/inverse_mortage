@@ -8,8 +8,8 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-personas_controller.drop_and_recreate_table_people()
-propiedades_controller.reset_table_property()
+personas_controller.drop_table_people()
+propiedades_controller.drop_table_property()
 
 @app.route("/")
 def index():
@@ -98,7 +98,23 @@ def editar(propiedad_id):
     return render_template("editar.html", propiedad=propiedad)
 
 
-
+@app.route("/crear_db", methods=["GET", "POST"])
+def crear_db():
+    mensaje = ""
+    if request.method == "POST":
+        if "crear_personas" in request.form:
+            try:
+                personas_controller.create_table_people()
+                mensaje += "Tabla de personas creada exitosamente. "
+            except Exception as e:
+                mensaje += f"Error al crear la tabla de personas: {e}. "
+        if "crear_propiedades" in request.form:
+            try:
+                propiedades_controller.create_table_property()
+                mensaje += "Tabla de propiedades creada exitosamente."
+            except Exception as e:
+                mensaje += f"Error al crear la tabla de propiedades: {e}."
+    return render_template("crear_db.html", mensaje=mensaje)
 
 
 if __name__ == "__main__":

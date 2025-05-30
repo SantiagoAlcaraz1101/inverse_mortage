@@ -23,10 +23,10 @@ def create_table_property():
         cursor.execute(query)
             
         conn.commit()
-        print("Tabla propiedad creada correctamente.")
+        
 
     except Exception as e:
-        print(f"Error creating table: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -39,9 +39,9 @@ def insert_property(property: Property):
             query = query.read()
         cursor.execute(query, property.to_tuple())
         conn.commit()
-        print("Propiedad insertada correctamente.")
+        
     except Exception as e:
-        print(f"Error inserting property: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -88,7 +88,7 @@ def buscar_propiedades_por_nombre(nombre: str):
         cursor.execute(query, (f"%{nombre}%",))
         return cursor.fetchall()
     except Exception as e:
-        print(f"Error buscando propiedades por nombre: {e}")
+        print()
         return []
     finally:
         cursor.close()
@@ -118,16 +118,14 @@ def drop_table_property():
         query = "DROP TABLE IF EXISTS propiedades CASCADE;"
         cursor.execute(query)
         conn.commit()
-        print("Tabla propiedad eliminada correctamente.")
+        
     except Exception as e:
-        print(f"Error eliminando la tabla propiedad: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
 
-def reset_table_property():
-    drop_table_property()
-    create_table_property()
+
 
 create_table_property()
 

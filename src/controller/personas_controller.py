@@ -25,10 +25,10 @@ def create_table_people():
         cursor.execute(query)
             
         conn.commit()
-        print("Tabla personas creada correctamente.")
+        
 
     except Exception as e:
-        print(f"Error creating table: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -43,9 +43,9 @@ def insert_person(person: Person):
         cursor.execute(query, person.to_tuple())
             
         conn.commit()
-        print("Persona insertada correctamente.")
+       
     except Exception as e:
-        print(f"Error inserting persona: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -60,9 +60,9 @@ def delete_person(id_person: int):
         cursor.execute(query, (id_person,))
             
         conn.commit()
-        print("Persona eliminada correctamente.")
+        
     except Exception as e:
-        print(f"Error deleting persona: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -78,9 +78,9 @@ def update_persona(id_person: int, person: Person):
         cursor.execute(query, (*new_person, id_person))
             
         conn.commit()
-        print("Persona actualizada correctamente.")
+        
     except Exception as e:
-        print(f"Error updating persona: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -96,7 +96,7 @@ def select_person_properties(id_person: int):
         for row in rows:
             print(row)
     except Exception as e:
-        print(f"Error selecting all properties: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
@@ -109,7 +109,7 @@ def buscar_personas_por_nombre(nombre: str):
         cursor.execute(query, (f"%{nombre}%",))
         return cursor.fetchall()
     except Exception as e:
-        print(f"Error buscando personas por nombre: {e}")
+        print()
         return []
     finally:
         cursor.close()
@@ -117,16 +117,15 @@ def buscar_personas_por_nombre(nombre: str):
 
 
 
-def drop_and_recreate_table_people():
+def drop_table_people():
     conn = connect_db()
     cursor = conn.cursor()
     try:
         cursor.execute("DROP TABLE IF EXISTS personas CASCADE;")
         conn.commit()
-        print("Tabla personas eliminada correctamente.")
-        create_table_people()
+        
     except Exception as e:
-        print(f"Error dropping and recreating table: {e}")
+        print()
     finally:
         cursor.close()
         conn.close()
