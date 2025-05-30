@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Propiedad</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f6fa;
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 480px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 28px 24px 28px;
+        }
+        h2 {
+            color: #2d3a4b;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        form {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #2d3a4b;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 10px;
+            margin-bottom: 18px;
+            border: 1px solid #d1d9e6;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #f9fafb;
+            transition: border 0.2s;
+        }
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            border-color: #4f8cff;
+            outline: none;
+        }
+        button[type="submit"] {
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            margin-top: 8px;
+        }
+        button[type="submit"]:hover {
+            background: #2563eb;
+        }
+        .no-result, .mensaje {
+            color: #e53e3e;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .volver-btn {
+            width: 100%;
+            margin-top: 18px;
+            background: #e2e8f0;
+            color: #2d3a4b;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .volver-btn:hover {
+            background: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if mensaje %}
+            <div class="mensaje">{{ mensaje }}</div>
+        {% endif %}
+
+        {% if propiedad %}
+        <h2>Editar Propiedad</h2>
+        <form method="post">
+            <label for="estrato">Estrato:</label>
+            <input type="number" name="estrato" value="{{ propiedad[0] }}" required>
+
+            <label for="valor_comercial">Valor comercial:</label>
+            <input type="number" name="valor_comercial" value="{{ propiedad[1] }}" required>
+
+            <label for="antiguedad">Antigüedad:</label>
+            <input type="number" name="antiguedad" value="{{ propiedad[2] }}" required>
+
+            <label for="legalidad">¿Es legal? (Sí/No):</label>
+            <input type="text" name="legalidad" value="{{ 'Sí' if propiedad[3] else 'No' }}" required>
+
+            <label for="titulo_propiedad">¿Tiene título? (Sí/No):</label>
+            <input type="text" name="titulo_propiedad" value="{{ 'Sí' if propiedad[4] else 'No' }}" required>
+
+            <button type="submit">Actualizar</button>
+        </form>
+        {% else %}
+            <div class="no-result">No se encontró la propiedad.</div>
+        {% endif %}
+
+        <div style="display: flex; justify-content: center;">
+            <a href="{{ url_for('buscar') }}" class="volver-btn" style="max-width: 100%;">Volver a buscar</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-CREATE TABLE propiedades (
+CREATE TABLE if not exists propiedades (
     id_propiedad VARCHAR(256) PRIMARY KEY,
     estrato SMALLINT NOT NULL,
     valor_comercial REAL NOT NULL,

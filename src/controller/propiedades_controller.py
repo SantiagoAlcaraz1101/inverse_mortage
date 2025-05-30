@@ -51,7 +51,8 @@ def delete_property(propiedad_id):
     connection = connect_db()
     cursor = connection.cursor()
     try:
-        cursor.execute("DELETE FROM propiedades WHERE id = ?", (propiedad_id,))
+        cursor.execute("DELETE FROM personas WHERE id_propiedad = %s", (propiedad_id,))
+        cursor.execute("DELETE FROM propiedades WHERE id_propiedad = %s", (propiedad_id,))
         connection.commit()
     finally:
         connection.close()
@@ -62,10 +63,17 @@ def update_property(propiedad_id, estrato, valor_comercial, antiguedad, legalida
     cursor = connection.cursor()
     try:
         cursor.execute("""
-            UPDATE propiedades 
-            SET estrato = ?, valor_comercial = ?, antiguedad = ?, legalidad = ?, titulo_propiedad = ?
-            WHERE id_propiedad = ?
-        """, (estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad, propiedad_id))
+            UPDATE propiedades
+            SET estrato = %s, valor_comercial = %s, antiguedad = %s, legalidad = %s
+            WHERE id_propiedad = %s
+        """, (estrato, valor_comercial, antiguedad, legalidad, propiedad_id))
+
+        cursor.execute("""
+            UPDATE personas pr
+            SET posee_titulo_propiedad = %s
+            FROM propiedades p
+            WHERE pr.id_propiedad = p.id_propiedad AND p.id_propiedad = %s
+        """, (titulo_propiedad, propiedad_id))
         connection.commit()
     finally:
         connection.close()
@@ -91,7 +99,14 @@ def buscar_propiedades_por_nombre(nombre: str):
 def select_property_properties(propiedad_id):
     connection = connect_db()
     cursor = connection.cursor()
-    cursor.execute("SELECT estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad, id_propiedad FROM propiedades WHERE id = ?", (propiedad_id,))
+    cursor.execute("""
+    SELECT p.estrato, p.valor_comercial, p.antiguedad, p.legalidad, p.impuestos,
+           pr.posee_titulo_propiedad, p.id_propiedad
+    FROM propiedades p
+    JOIN personas pr ON p.id_propiedad = pr.id_propiedad
+    WHERE p.id_propiedad = %s
+""", (propiedad_id,))
+
     propiedad = cursor.fetchone()
     connection.close()
     return propiedad
@@ -100,8 +115,7 @@ def drop_table_property():
     conn = connect_db()
     cursor = conn.cursor()
     try:
-        with open('src/sql/drop_table_property.sql', 'r') as query:
-            query = query.read()
+        query = "DROP TABLE IF EXISTS propiedades CASCADE;"
         cursor.execute(query)
         conn.commit()
         print("Tabla propiedad eliminada correctamente.")
@@ -116,12 +130,6 @@ def reset_table_property():
     create_table_property()
 
 create_table_property()
-# propiedad_ejemplo = Property(3, 800000000, 18, True, True)
-# insert_property(propiedad_ejemplo)
-#new_property = Property(5, 600000000, 18, True, True)
-# update_property(6, new_property)
-# select_property_properties(6)
-# delete_person(1)
-# delete_property(3)
+
 
 

@@ -8,6 +8,9 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+personas_controller.drop_and_recreate_table_people()
+propiedades_controller.reset_table_property()
+
 @app.route("/")
 def index():
     return render_template("principal.html")
@@ -52,17 +55,19 @@ def buscar():
 from flask import redirect, url_for
 
 
-@app.route("/eliminar/<int:propiedad_id>", methods=["POST"])
-def eliminar_propiedad(propiedad_id):
+@app.route("/eliminar/<string:propiedad_id>", methods=["POST"])
+def eliminar(propiedad_id):
     try:
+        print(f"ID recibido para eliminar: {propiedad_id}")  # 🔍
         propiedades_controller.delete_property(propiedad_id)
         return redirect(url_for("buscar"))
     except Exception as e:
         mensaje = f"Error al eliminar la propiedad: {e}."
+        print(mensaje)  # 🔍 Esto imprime el error completo
         return render_template("buscar.html", propiedades=[], mensaje=mensaje)
 
-@app.route("/editar/<int:propiedad_id>", methods=["GET", "POST"])
-def editar_propiedad(propiedad_id):
+@app.route("/editar/<string:propiedad_id>", methods=["GET", "POST"])
+def editar(propiedad_id):
     # Usar la función select_property_properties para obtener la propiedad
     propiedad_data = propiedades_controller.select_property_properties(propiedad_id)
     if not propiedad_data:
@@ -97,4 +102,4 @@ def editar_propiedad(propiedad_id):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

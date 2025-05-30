@@ -1,4 +1,4 @@
-CREATE TABLE personas(
+CREATE TABLE if not exists personas(
     id_persona SERIAL PRIMARY KEY,
     nombre_apellido_persona VARCHAR(50) NOT NULL,
     edad SMALLINT NOT NULL,
