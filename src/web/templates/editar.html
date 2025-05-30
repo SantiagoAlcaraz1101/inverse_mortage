@@ -3,49 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Propiedad</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2em; }
-        form { max-width: 400px; }
-        label { display: block; margin-top: 1em; }
-        input[type="text"], input[type="number"] { width: 100%; padding: 0.5em; }
-        .mensaje { margin-bottom: 1em; color: #d9534f; }
-        .exito { color: #28a745; }
-        button { margin-top: 1em; padding: 0.5em 1em; }
-    </style>
 </head>
 <body>
-    <h1>Editar Propiedad</h1>
     {% if mensaje %}
-        <div class="mensaje {% if propiedad %}exito{% endif %}">{{ mensaje }}</div>
+        <p>{{ mensaje }}</p>
     {% endif %}
 
     {% if propiedad %}
     <form method="post">
         <label for="estrato">Estrato:</label>
-        <input type="number" id="estrato" name="estrato" min="1" max="6" required value="{{ propiedad.estrato }}">
+        <input type="number" name="estrato" value="{{ propiedad[0] }}" required><br>
 
-        <label for="valor_comercial">Valor Comercial:</label>
-        <input type="number" id="valor_comercial" name="valor_comercial" step="0.01" min="0" required value="{{ propiedad.valor_comercial }}">
+        <label for="valor_comercial">Valor comercial:</label>
+        <input type="number" name="valor_comercial" value="{{ propiedad[1] }}" required><br>
 
-        <label for="antiguedad">Antigüedad (años):</label>
-        <input type="number" id="antiguedad" name="antiguedad" min="0" required value="{{ propiedad.antiguedad }}">
+        <label for="antiguedad">Antigüedad:</label>
+        <input type="number" name="antiguedad" value="{{ propiedad[2] }}" required><br>
 
-        <label for="legalidad">Legalidad:</label>
-        <select id="legalidad" name="legalidad" required>
-            <option value="true" {% if propiedad.legalidad %}selected{% endif %}>Sí</option>
-            <option value="false" {% if not propiedad.legalidad %}selected{% endif %}>No</option>
-        </select>
+        <label for="legalidad">¿Es legal? (Sí/No):</label>
+        <input type="text" name="legalidad" value="{{ 'Sí' if propiedad[3] else 'No' }}" required><br>
 
-        <label for="titulo_propiedad">Título de Propiedad:</label>
-        <select id="titulo_propiedad" name="titulo_propiedad" required>
-            <option value="true" {% if propiedad.titulo_propiedad %}selected{% endif %}>Sí</option>
-            <option value="false" {% if not propiedad.titulo_propiedad %}selected{% endif %}>No</option>
-        </select>
+        <label for="titulo_propiedad">¿Tiene título? (Sí/No):</label>
+        <input type="text" name="titulo_propiedad" value="{{ 'Sí' if propiedad[4] else 'No' }}" required><br>
 
         <button type="submit">Actualizar</button>
     </form>
     {% else %}
         <p>No se encontró la propiedad.</p>
     {% endif %}
+
+    <a href="{{ url_for('buscar') }}">Volver a buscar</a>
 </body>
 </html>

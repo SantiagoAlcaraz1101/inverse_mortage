@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -84,29 +83,51 @@
             margin-top: 20px;
             text-align: center;
         }
+        .buscar-btn {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+        <div class="container">
+        {% if mensaje %}
+            <div class="no-result">{{ mensaje }}</div>
+        {% endif %}
+
     <div class="container">
+        {% if not propiedades and request.method != 'POST' %}
         <form method="post">
             <input type="text" name="nombre" placeholder="Nombre de la persona" required>
-            <button type="submit">Buscar</button>
-
-            {% if propiedades %}
-                <h2>Propiedades encontradas:</h2>
-                {% for propiedad in propiedades %}
-                    <div class="propiedad">
-                        <p><strong>Estrato:</strong> {{ propiedad[0] }}</p>
-                        <p><strong>Valor comercial:</strong> {{ propiedad[1] }}</p>
-                        <p><strong>Antigüedad:</strong> {{ propiedad[2] }} años</p>
-                        <p><strong>Legalidad:</strong> {{ 'Sí' if propiedad[3] else 'No' }}</p>
-                        <p><strong>Título de propiedad:</strong> {{ 'Sí' if propiedad[4] else 'No' }}</p>
-                    </div>
-                {% endfor %}
-            {% elif request.method == 'POST' %}
-                <div class="no-result">No se encontraron propiedades para ese nombre.</div>
-            {% endif %}
+            <button type="submit" class="buscar-btn">Buscar</button>
         </form>
+        {% endif %}
+
+        {% if propiedades %}
+            <h2>Resultado de Propiedades asociadas a {{ request.form['nombre'] }}</h2>
+            {% for propiedad in propiedades %}
+            <div class="propiedad">
+                <p><strong>Estrato:</strong> {{ propiedad[0] }}</p>
+                <p><strong>Valor comercial:</strong> {{ propiedad[1] }}</p>
+                <p><strong>Antigüedad:</strong> {{ propiedad[2] }} años</p>
+                <p><strong>Legalidad:</strong> {{ 'Sí' if propiedad[3] else 'No' }}</p>
+                <p><strong>Título de propiedad:</strong> {{ 'Sí' if propiedad[4] else 'No' }}</p>
+                <form action="/editar/{{ propiedad[5] }}" method="get" style="display:inline;">
+                    <button type="submit" style="background:#fbbf24;color:#2d3a4b;margin-top:10px;">Editar</button>
+                </form>
+                <form action="/eliminar/{{ propiedad[5] }}" method="post" style="display:inline;">
+                    <button type="submit" style="background:#ef4444;color:#fff;margin-top:10px;margin-left:8px;" onclick="return confirm('¿Estás seguro de que deseas eliminar esta propiedad?');">Eliminar</button>
+                </form>
+            </div>
+            {% endfor %}
+            <form method="get">
+                <button type="submit" class="buscar-btn">Volver a buscar</button>
+            </form>
+        {% elif request.method == 'POST' %}
+            <div class="no-result">No se encontraron propiedades para ese nombre.</div>
+            <form method="get">
+                <button type="submit" class="buscar-btn">Volver a buscar</button>
+            </form>
+        {% endif %}
 
         <form action="/" method="get">
             <button type="submit" class="volver-btn">Volver al inicio</button>
@@ -114,4 +135,3 @@
     </div>
 </body>
 </html>
-        }

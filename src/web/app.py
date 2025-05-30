@@ -49,20 +49,30 @@ def buscar():
     if request.method == "POST":
         nombre = request.form["nombre"]
         propiedades = propiedades_controller.buscar_propiedades_por_nombre(nombre)
-        if not propiedades:
-            mensaje = f"No se encontraron propiedades a nombre de {nombre}."
-        else:
-            mensaje = f"Propiedades encontradas para {nombre}:"
-        return render_template("buscar.html", propiedades=propiedades, mensaje=mensaje)
-    return render_template("buscar.html")
+        return render_template("buscar.html", propiedades=propiedades)
+    return render_template("buscar.html", propiedades=[])
 
 from flask import redirect, url_for
 
-@app.route("/editar", methods=["GET", "POST"])
-def editar(id_propiedad):
-    propiedad = propiedades_controller.select_property_properties(id_propiedad)
-    if not propiedad:
-        return render_template("editar.html", mensaje="Propiedad no encontrada.", propiedad=None)
+@app.route("/eliminar/<int:propiedad_id>", methods=["POST"])
+def eliminar_propiedad(propiedad_id):
+    try:
+        propiedades_controller.delete_property(propiedad_id)
+        return redirect(url_for("buscar"))
+    except Exception as e:
+        mensaje = f"Error al eliminar la propiedad: {e}."
+        return render_template("buscar.html", propiedades=[], mensaje=mensaje)
+
+@app.route("/editar/<int:propiedad_id>", methods=["GET", "POST"])
+def editar_propiedad(propiedad_id):
+    # Usar la función select_property_properties para obtener la propiedad
+    propiedad_data = propiedades_controller.select_property_properties(propiedad_id)
+    if not propiedad_data:
+        mensaje = "Propiedad no encontrada."
+        return render_template("editar.html", propiedad=None, mensaje=mensaje)
+
+    # Si select_property_properties imprime y no retorna, deberías modificarla para retornar los datos
+    propiedad = propiedad_data  # Ajusta esto según el formato retornado
 
     if request.method == "POST":
         try:
@@ -72,16 +82,18 @@ def editar(id_propiedad):
             legalidad = request.form["legalidad"].lower() in ["true", "1", "si", "sí"]
             titulo_propiedad = request.form["titulo_propiedad"].lower() in ["true", "1", "si", "sí"]
 
-            nueva_propiedad = Property(estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad)
-            propiedades_controller.update_property(id_propiedad, nueva_propiedad)
-            mensaje = "Propiedad actualizada correctamente."
-            propiedad = nueva_propiedad
+            propiedades_controller.update_property(
+                propiedad_id, estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad
+            )
+            mensaje = "Propiedad actualizada exitosamente."
+            propiedad = propiedades_controller.select_property_properties(propiedad_id)
         except Exception as e:
             print(f"Error al actualizar la propiedad: {e}")
             mensaje = "Error al actualizar la propiedad."
-        return render_template("editar.html", mensaje=mensaje, propiedad=propiedad)
+        return render_template("editar.html", propiedad=propiedad, mensaje=mensaje)
 
     return render_template("editar.html", propiedad=propiedad)
+
 
 
 if __name__ == "__main__":

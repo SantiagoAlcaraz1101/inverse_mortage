@@ -47,41 +47,29 @@ def insert_property(property: Property):
         conn.close()
 
 
-def delete_property(id: str):
-    
-    conn = connect_db()
-    cursor = conn.cursor()
+def delete_property(propiedad_id):
+    connection = connect_db()
+    cursor = connection.cursor()
     try:
-        with open ('src/sql/delete_property.sql', 'r') as query:
-            query = query.read()
-            
-        cursor.execute(query, (id,))
-            
-        conn.commit()
-        print("Propiedad eliminada correctamente.")
-    except Exception as e:
-        print(f"Error deleting propiedad: {e}")
+        cursor.execute("DELETE FROM propiedades WHERE id = ?", (propiedad_id,))
+        connection.commit()
     finally:
-        cursor.close()
-        conn.close()
+        connection.close()
 
-def update_property(id: int, property: Property):
-    conn = connect_db()
-    cursor = conn.cursor()
+
+def update_property(propiedad_id, estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad):
+    connection = connect_db()
+    cursor = connection.cursor()
     try:
-        with open ('src/sql/update_property.sql', 'r') as query:
-            query = query.read()
-            
-        new_property = property.to_tuple()
-        cursor.execute(query, (*new_property, id))
-            
-        conn.commit()
-        print("Propiedad actualizada correctamente.")
-    except Exception as e:
-        print(f"Error updating propiedad: {e}")
+        cursor.execute("""
+            UPDATE propiedades 
+            SET estrato = ?, valor_comercial = ?, antiguedad = ?, legalidad = ?, titulo_propiedad = ?
+            WHERE id_propiedad = ?
+        """, (estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad, propiedad_id))
+        connection.commit()
     finally:
-        cursor.close()
-        conn.close()
+        connection.close()
+
 
 def buscar_propiedades_por_nombre(nombre: str):
     conn = connect_db()
@@ -99,21 +87,14 @@ def buscar_propiedades_por_nombre(nombre: str):
         conn.close()
 
         
-def select_property_properties(id_property: int):
-    conn = connect_db()
-    cursor = conn.cursor()
-    try:
-        with open ('src/sql/select_property.sql', 'r') as query:
-            query = query.read()
-        cursor.execute(query, (id_property,))
-        rows = cursor.fetchall()
-        for row in rows:
-            print(row)
-    except Exception as e:
-        print(f"Error selecting all properties: {e}")
-    finally:
-        cursor.close()
-        conn.close()
+
+def select_property_properties(propiedad_id):
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("SELECT estrato, valor_comercial, antiguedad, legalidad, titulo_propiedad, id_propiedad FROM propiedades WHERE id = ?", (propiedad_id,))
+    propiedad = cursor.fetchone()
+    connection.close()
+    return propiedad
 
 def drop_table_property():
     conn = connect_db()
